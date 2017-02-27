@@ -1,21 +1,39 @@
 body {
+    /*background-image: url("")*/
     /*font-family: "Lato", sans-serif;*/
     /*background-color: #dee7ef;*/
     background: red; /* For browsers that do not support gradients */
-    background: -webkit-radial-gradient(circle, #63d0bd, #a7e5bf, #eff8e1, #ffa1af); /* Safari */
-    background: -o-radial-gradient(circle, #63d0bd, #a7e5bf, #eff8e1, #ffa1af); /* Opera 11.6 to 12.0 */
-    background: -moz-radial-gradient(circle, #63d0bd, #a7e5bf, #eff8e1, #ffa1af); /* Firefox 3.6 to 15 */
+    background: -webkit-radial-gradient(circle, #63d0bd, #a7e5bf, #eff8e1, #ffa1af); /* Safari *!*/
+    background: -o-radial-gradient(circle, #63d0bd, #a7e5bf, #eff8e1, #ffa1af); /* Opera 11.6 to 12.0 *!*/
+    background: -moz-radial-gradient(circle, #63d0bd, #a7e5bf, #eff8e1, #ffa1af); /* Firefox 3.6 to 15 *!*/
     background: radial-gradient(circle, #63d0bd, #a7e5bf, #eff8e1, #ffa1af);
 }/* Standard syntax */
 
-.headers{
+.title{
     text-align: center;
     position: fixed;
     font-family: 'fontawesome', Georgia, Serif;
+    font-src: fontawesome-webfont;
+    /*scr: url(fontawesome.woff);*/
     text-rendering: optimizeLegibility;
     height: inherit;
     font-size: 1.5em;
     line-height: 1rem;
+}
+/*Should be in the lower middle of the page i
+ballparked the location and size of the box so play with this as you wish.*/
+.google_maps{
+    display: block;
+    background-color: cornflowerblue;
+    border: cornflowerblue;
+    font-family: "futura";
+    font-stretch: ultra-expanded;
+    font-size: .7em;
+    color: white;
+    top: 350px;
+    left: 600px;
+    width: 150px;
+    height: 50px;
 }
 
 

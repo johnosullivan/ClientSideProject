@@ -6,3 +6,9 @@ function openMenu() {
 function closeMenu() {
    document.getElementById("menu").style.display = "none";
 }
+
+function getFlightID(){
+   //grab flight info for the flight
+}
+
+
