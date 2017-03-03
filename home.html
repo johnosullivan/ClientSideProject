@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Go? Flight Tracker</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style/main.css">
+</head>
+<body id="bodyID">
+
+
+
+
+
+
+  <script type="text/javascript">
+      var imgCount = 3;
+      var dir = 'images/';
+      var randomCount = Math.round(Math.random() * (imgCount - 1)) + 1;
+      var images = new Array
+      images[1] = "chicago.jpg",
+      images[2] = "chicago.jpg",
+      images[3] = "chicago.jpg",
+      document.getElementById("bodyID").style.backgroundImage = "url(" + dir + images[randomCount] + ")";
+  </script>
+</body>
+</html>
