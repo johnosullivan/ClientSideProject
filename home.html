@@ -6,21 +6,29 @@
 <link rel="stylesheet" href="style/main.css">
 </head>
 <body id="bodyID">
+<!---
+ Used this guy for the google maps plugin to use gmaps
+to map th route
+http://tilotiti.github.io/jQuery-Google-Map/
+-->
 
 
 
 
 
+<script src="javascripts/jquery.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR-API-KEY"></script>
+<script type="text/javascript" src="javascripts/jquery.googlemap.js"></script>
 
-  <script type="text/javascript">
-      var imgCount = 3;
-      var dir = 'images/';
-      var randomCount = Math.round(Math.random() * (imgCount - 1)) + 1;
-      var images = new Array
-      images[1] = "chicago.jpg",
-      images[2] = "chicago.jpg",
-      images[3] = "chicago.jpg",
-      document.getElementById("bodyID").style.backgroundImage = "url(" + dir + images[randomCount] + ")";
+<script type="text/javascript">
+    var imgCount = 3;
+    var dir = 'images/';
+    var randomCount = Math.round(Math.random() * (imgCount - 1)) + 1;
+    var images = new Array
+    images[1] = "chicago.jpg",
+        images[2] = "chicago.jpg",
+        images[3] = "chicago.jpg",
+        document.getElementById("bodyID").style.backgroundImage = "url(" + dir + images[randomCount] + ")";
   </script>
 </body>
 </html>
