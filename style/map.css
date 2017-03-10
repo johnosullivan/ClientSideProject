@@ -1,7 +1,7 @@
 /* Always set the map height explicitly to define the size of the div
  * element that contains the map. */
 #map {
-  height: 96%;
+  height: 96.5%;
 }
 
 
@@ -60,7 +60,7 @@ the stacking order, position, padding, and overflow-x for the edges.
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #6d7582;
+    background-color: #ebeff4;
     overflow-x: hidden;
     padding-top: 60px;
 }
@@ -68,7 +68,7 @@ the stacking order, position, padding, and overflow-x for the edges.
 anchor elements that are in the sidenav will have the 8,8,8,32px padding and 25px Lato font.
 */
 .sidenav a {
-    padding: 8px 8px 8px 32px;
+    padding: 0px 0px 0px 32px;
     text-decoration: none;
     font-size: 25px;
     color: #FFF;
@@ -86,8 +86,8 @@ closebtn within the element sidenav will have an absolute position and a font-si
 */
 .sidenav .closebtn {
     position: absolute;
-    top: 0;
-    right: 25px;
+    top: 0px;
+    right: 15px;
     font-size: 36px;
     margin-left: 50px;
 }
