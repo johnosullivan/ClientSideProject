@@ -3,23 +3,37 @@
 <head>
 <title>Go? Flight Tracker</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style/main.css">
+<link rel="stylesheet" href="style/home.css">
 </head>
 <body id="bodyID">
-<<<<<<< Updated upstream
 <!---
  Used this guy for the google maps plugin to use gmaps
 to map th route
 http://tilotiti.github.io/jQuery-Google-Map/
 -->
+<nav>
+  <ul>
+  <li><a href="#home">Github</a></li>
+  <li><a href="#about">About</a></li>
+  </ul>
+</nav>
+
+<main>
 
 
+  <form action="/action_page.php">
+      <label for="fname"><strong>Flight ID</strong></label>
+      <input type="text" id="fname" name="firstname" placeholder="flight">
+      <label for="lname"><strong>Where are you leaving from?</strong></label>
+      <input type="text" id="lname" name="lastname" placeholder="your location">
+      <input type="submit" value="Submit">
+  </form>
 
 
-
-<script src="javascripts/jquery.js"></script>
+</main>
+<!--<script src="javascripts/jquery.js"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR-API-KEY"></script>
-<script type="text/javascript" src="javascripts/jquery.googlemap.js"></script>
+<script type="text/javascript" src="javascripts/jquery.googlemap.js"></script>-->
 
 <script type="text/javascript">
     var imgCount = 3;
@@ -27,21 +41,10 @@ http://tilotiti.github.io/jQuery-Google-Map/
     var randomCount = Math.round(Math.random() * (imgCount - 1)) + 1;
     var images = new Array
     images[1] = "chicago.jpg",
-        images[2] = "chicago.jpg",
-        images[3] = "chicago.jpg",
-        document.getElementById("bodyID").style.backgroundImage = "url(" + dir + images[randomCount] + ")";
-=======
-  <script type="text/javascript">
-      var imgCount = 3;
-      var dir = 'images/';
-      var randomCount = Math.round(Math.random() * (imgCount - 1)) + 1;
-      var images = new Array
-      images[1] = "chicago.jpg",
-      images[2] = "chicago.jpg",
-      images[3] = "chicago.jpg",
-      document.getElementById("bodyID").style.backgroundImage = "url(" + dir + images[randomCount] + ")";
->>>>>>> Stashed changes
-  </script>
+    images[2] = "chicago.jpg",
+    images[3] = "chicago.jpg";
+    document.getElementById("bodyID").style.backgroundImage = "url(" + dir + images[randomCount] + ")";
+</script>
 
 </body>
 
