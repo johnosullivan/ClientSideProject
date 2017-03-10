@@ -1,14 +1,14 @@
 /* Always set the map height explicitly to define the size of the div
  * element that contains the map. */
 #map {
-  height: 96.5%;
+  height: 100%;
 }
 
 
 html, body {
   height: 100%;
   margin: 0;
-  padding: 0;
+  padding: 0px;
   border-color: gray;
 }
 
@@ -19,7 +19,40 @@ nav {
   background-color: #4d78bc;
 }
 
+label {
+  color: lightgray;
+}
 
+
+.labelname {
+  width: 100%;
+  font-size:16px;
+  padding: 0px 0px 0px 0px;
+  color: #4d78bc;
+}
+
+.labelvalue {
+  width: 100%;
+  font-size:16px;
+  padding: 0px 0px 0px 0px;
+  color: black;
+}
+
+.sidenavtop {
+  width: 100%;
+  height:  95%;
+  text-decoration: none;
+  font-size: 25px;
+  color: #FFF;
+  display: block;
+  transition: 0.3s
+}
+
+.sidenavtop label {
+  width: 100%;
+  font-size:16px;
+  padding: 0px 0px 0px 0px;
+}
 .title{
     text-align: center;
     position: fixed;
@@ -31,22 +64,106 @@ nav {
     font-size: 1.5em;
     line-height: 1rem;
 }
-/*Should be in the lower middle of the page i
-ballparked the location and size of the box so play with this as you wish.*/
-.google_maps{
-    display: block;
-    background-color: cornflowerblue;
-    border: cornflowerblue;
-    font-family: "futura";
-    font-stretch: ultra-expanded;
-    font-size: .7em;
-    color: white;
-    top: 350px;
-    left: 600px;
-    width: 150px;
-    height: 50px;
+
+
+input[type=text], select {
+    width: 100%;
+    font-size:15px;
+    padding: 10px 10px;
+    display: inline-block;
+    border-radius: 5px;
+    box-sizing: border-box;
 }
 
+input[type=submit] {
+    width: 100%;
+    background-color: lightgray;
+    color: black;
+    padding: 14px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: white;
+}
+input[type=range] {
+    -webkit-appearance: none;
+    border: 1px solid white;
+    width: 300px;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 5px;
+    background: #4d78bc;
+    border: none;
+    border-radius: 3px;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #4d78bc;
+    margin-top: -4px;
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #4d78bc;
+}
+
+input[type=range]::-moz-range-track {
+    width: 300px;
+    height: 5px;
+    background: #4d78bc;
+    border: none;
+    border-radius: 3px;
+}
+input[type=range]::-moz-range-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #4d78bc;
+}
+
+input[type=range]:-moz-focusring{
+    outline: 1px solid white;
+    outline-offset: -1px;
+}
+
+input[type=range]::-ms-track {
+    width: 300px;
+    height: 5px;
+    background: transparent;
+    border-color: transparent;
+    border-width: 6px 0;
+    color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+    background: #777;
+    border-radius: 10px;
+}
+input[type=range]::-ms-fill-upper {
+    background: #ddd;
+    border-radius: 10px;
+}
+input[type=range]::-ms-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: goldenrod;
+}
+input[type=range]:focus::-ms-fill-lower {
+    background: #888;
+}
+input[type=range]:focus::-ms-fill-upper {
+    background: #ccc;
+}
 
 /*
 First ruleset for the sidenav class. This ruleset sets the height,width,z-index for
@@ -56,13 +173,15 @@ the stacking order, position, padding, and overflow-x for the edges.
     display: none;
     height: 100%;
     width: 400px;
-    position: fixed;/
+    position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
     background-color: #ebeff4;
     overflow-x: hidden;
-    padding-top: 60px;
+    padding-top: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 /*
 anchor elements that are in the sidenav will have the 8,8,8,32px padding and 25px Lato font.
