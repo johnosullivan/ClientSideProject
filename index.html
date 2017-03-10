@@ -3,24 +3,55 @@
 <head>
 <title>Go? Flight Tracker</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- links the stylesheet from the style folder -->
-<link rel="stylesheet" href="style/main.css">
+<link rel="stylesheet" href="style/home.css">
 </head>
-<body>
-  <!-- Nav bar for the slide menu-->
-  <nav>
-    <span style="font-size:30px;cursor:pointer" onclick="openMenu()">&#9776;</span>
-  </nav>
-  <!-- Main selection for content -->
-  <main>
-  
-  </main>
-  <!-- Aside for the menu -->
-  <aside id="menu" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeMenu()">&times;</a>
-    <a href="#">About</a>
-  </aside>
-  <!-- Imports the script for the page -->
-  <script src="scripts/main.js"></script>
+<body id="bodyID">
+<!---
+ Used this guy for the google maps plugin to use gmaps
+to map th route
+http://tilotiti.github.io/jQuery-Google-Map/
+-->
+<nav>
+  <ul>
+  <li><a href="#home"><strong>Github</strong></a></li>
+  <li><a href="#about"><strong>About</strong></a></li>
+  </ul>
+</nav>
+
+<main>
+
+
+  <form action="/action_page.php">
+      <label for="fname"><strong>Flight ID</strong></label>
+      <input type="text" id="fname" name="firstname" placeholder="flight">
+      <label for="lname"><strong>Where are you leaving from?</strong></label>
+      <input type="text" id="lname" name="lastname" placeholder="your location">
+      <input type="submit" value="Go">
+  </form>
+
+
+</main>
+<!--<script src="javascripts/jquery.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR-API-KEY"></script>
+<script type="text/javascript" src="javascripts/jquery.googlemap.js"></script>-->
+
+<script type="text/javascript">
+    var imgCount = 3;
+    var dir = 'images/';
+    var randomCount = Math.round(Math.random() * (imgCount - 1)) + 1;
+    var images = new Array
+    images[1] = "chicago.jpg",
+    images[2] = "chicago.jpg",
+    images[3] = "chicago.jpg";
+    document.getElementById("bodyID").style.backgroundImage = "url(" + dir + images[randomCount] + ")";
+</script>
+
 </body>
+
 </html>
+
+<!--TODO: add "go button" to home page -->
+<!--TODO: add "go" button to gmaps page -->
+<!--TODO: make images background of hme page -->
+<!--TODO: add "enter flight code here in entry field of home-->
+<!--TODO: the maps page in its entirity-->
