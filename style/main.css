@@ -4,11 +4,6 @@ body {
     /*background-image: url("")*/
     /*font-family: "Lato", sans-serif;*/
     /*background-color: #dee7ef;*/
-    background: red; /* For browsers that do not support gradients */
-    background: -webkit-radial-gradient(circle, #63d0bd, #a7e5bf, #eff8e1, #ffa1af); /* Safari *!*/
-    background: -o-radial-gradient(circle, #63d0bd, #a7e5bf, #eff8e1, #ffa1af); /* Opera 11.6 to 12.0 *!*/
-    background: -moz-radial-gradient(circle, #63d0bd, #a7e5bf, #eff8e1, #ffa1af); /* Firefox 3.6 to 15 *!*/
-    background: radial-gradient(circle, #63d0bd, #a7e5bf, #eff8e1, #ffa1af);
 }/* Standard syntax */
 
 .title{

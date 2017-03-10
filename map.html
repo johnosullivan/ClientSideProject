@@ -1,22 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Map</title>
-
-</head>
-<body>
-<div id="map" style="width: 300px; height: 300px;"></div>
-
-
-</body>
-<script type="text/javascript">
-    $(function() {
-        $("#map").googleMap({
-            zoom: 10, // Initial zoom level (optional)
-            coords: [48.895651, 2.290569], // Map center (optional)
-            type: "ROADMAP" // Map type (optional)
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 30px;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <nav>
+    <span style="font-size:30px;cursor:pointer" onclick="openMenu()">&#9776;</span>
+  </nav>
+  <body>
+    <div id="map"></div>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 41.871496, lng: -87.627104},
+          zoom: 11
         });
-    })
-</script>
+      }//41.871496, -87.627104
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnEaRoGByd-ZRA9KP_GVSWlzisVO0PukM&callback=initMap"
+    async defer></script>
+    <script src="scripts/map.js"></script>
+
+    <!-- Aside for the menu -->
+    <aside id="menu" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeMenu()">&times;</a>
+      <a href="#">About</a>
+    </aside>
+
+  </body>
+
 </html>

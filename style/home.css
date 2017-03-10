@@ -30,7 +30,7 @@ main {
 }
 
 main label {
-  color: gray;
+  color: lightgray;
 }
 
 li a {
@@ -58,8 +58,8 @@ input[type=text], select {
 
 input[type=submit] {
     width: 100%;
-    background-color: gray;
-    color: white;
+    background-color: lightgray;
+    color: black;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
