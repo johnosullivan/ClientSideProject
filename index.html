@@ -21,12 +21,13 @@ http://tilotiti.github.io/jQuery-Google-Map/
 <main>
 
 
-  <form action="/action_page.php">
-      <label for="fname"><strong>Flight ID</strong></label>
-      <input type="text" id="fname" name="firstname" placeholder="flight">
-      <label for="lname"><strong>Where are you leaving from?</strong></label>
-      <input type="text" id="lname" name="lastname" placeholder="your location">
-      <input type="submit" value="Go">
+  <!--<form action="/action_page.php">-->
+    <form action = map.html>
+      <label for="flight_ID"><strong>Flight ID</strong></label>
+      <input type="text" id="flight_ID" name="fl_ID" placeholder="flight">
+      <label for="depAdd"><strong>Where are you leaving from?</strong></label>
+      <input type="text" id="depAdd" name="departureAddress" placeholder="your location">
+      <button id="GoButton" type = submit> Go! </button>
   </form>
 
 

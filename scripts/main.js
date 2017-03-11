@@ -7,9 +7,31 @@ function closeMenu() {
    document.getElementById("menu").style.display = "none";
 }
 
-function getFlightID(){
-   //grab flight info for the flight
+//checks flight info then calls map opener
+function checkFlightID(){
+    var fName = document.getElementById(fName);
+    var lName = document.getElementById(lName);
+    if ((fName !== null) && (lName !== null)){
+        goToMap()
+    }
+    else {
+        document.getElementById(lNameLabel);
+    }
 }
-
+//should move the
+function goToMap() {
+    "use strict";
+//handle user event for `Go` button click
+    $(".Gobutton").on("click", $map.html(opener))
+    //{
+//object for wrapper html for note
+        //var $map = $("<p>");
+//get value from input field
+        //var note_text = $(".note-input input").val();
+//set content for note
+//append note text to note-output
+        //$(".note-output").append($note);
+    //});
+};
 
 
