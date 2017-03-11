@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Simple Map</title>
+    <title>Go -></title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <link rel="stylesheet" href="style/map.css">
@@ -12,7 +12,50 @@
   </nav>
   <div id="map"></div>
   <aside id="menu" class="sidenav">
-   <a href="javascript:void(0)" style="color:black;" class="closebtn" onclick="closeMenu()">&times;</a>
+   <a href="javascript:void(0)" style="color:black;" class="closebtn" onclick="closeMenu()"><strong>&times;</strong></a>
+   <div class="sidenavtop">
+     <label class="labelname" for="labelflight"><strong>Flight ID:</strong></label>
+     <input type="text" id="flight" name="flight" placeholder="flight" value="SWA1202">
+     <label class="labelname" for="labelflight"><strong>Your Location:</strong></label>
+     <input type="text" id="youlocation" name="youlocation" placeholder="your location" value="723 Ouilmette, Ln Wilmette 60091">
+     <label class="labelname" for="flight"><strong>Flight #:</strong></label>
+     <br>
+     <label class="labelvalue" for="flightvalue">1202</label>
+     <br>
+     <label class="labelname" for="airline"><strong>Airline Provider:</strong></label>
+     <br>
+     <label class="labelvalue" for="airlinevalue">Southwest Airline</label>
+     <br>
+     <label class="labelname" for="departure"><strong>Departure Airport:</strong></label>
+     <br>
+     <label class="labelvalue" for="departurevalue">(DXB) Dubai International Airport</label>
+     <br>
+     <label class="labelname" for="arrival"><strong>Arrival Airport:</strong></label>
+     <br>
+     <label class="labelvalue" for="arrivalvalue">(ORD) O'Hare International Airport</label>
+     <br>
+     <label class="labelname" for="equipment"><strong>Equipment:</strong></label>
+     <br>
+     <label class="labelvalue" for="equipmentvalue">Boeing 737</label>
+     <br>
+     <label class="labelname" for="equipment"><strong>Landing ETA:</strong></label>
+     <br>
+     <label class="labelvalue" for="equipmentvalue">34 mins</label>
+     <br>
+     <label class="labelname" for="equipment"><strong>Flight Delays:</strong></label>
+     <br>
+     <label class="labelvalue" for="equipmentvalue">+ 4 mins</label>
+     <br>
+     <label class="labelname" for="equipment"><strong>Travel:</strong></label>
+     <br>
+     <label class="labelvalue" for="equipmentvalue">High</label>
+     <br>
+     <label class="labelname" for="equipment"><strong>Buffer:</strong></label>
+     <br>
+     <input type="range">
+     <br>
+
+   </div>
   </aside>
   <script src="scripts/map.js"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_ep81AybHxhf6J3pc2eJ-AFEbxQ1cMbI&callback=initMap"></script>
