@@ -65,11 +65,7 @@ input[type=text], select {
     box-sizing: border-box;
 }
 
-<<<<<<< HEAD
 input[type=button] {
-=======
-button {
->>>>>>> origin/master
     width: 100%;
     background-color: #4d78bc;
     color: black;

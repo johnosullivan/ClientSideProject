@@ -16,6 +16,18 @@ body {
     height: inherit;
     line-height: 1rem;
 }
+input[type=button] {
+    width: 100%;
+    background-color: lightgray;
+    color: black;
+    padding: 14px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+input[type=button]:hover {
+    background-color: white;
+}
 /*Should be in the lower middle of the page i
 ballparked the location and size of the box so play with this as you wish.*/
 .google_maps{
