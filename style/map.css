@@ -23,10 +23,51 @@ label {
   color: lightgray;
 }
 
+h1 {
+  color: #4d78bc;
+}
+
+h2 {
+  color: black;
+}
+
+.loading {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #4d78bc;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  position: absolute;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
 .labelname {
   width: 100%;
   font-size:16px;
+  padding: 0px 0px 0px 0px;
+  color: #4d78bc;
+}
+
+.labelgo {
+  width: 100%;
+  font-size:26px;
   padding: 0px 0px 0px 0px;
   color: #4d78bc;
 }
@@ -71,7 +112,6 @@ input[type=text], select {
     font-size:15px;
     padding: 10px 10px;
     display: inline-block;
-    border-radius: 5px;
     box-sizing: border-box;
 }
 
@@ -90,10 +130,10 @@ input[type=submit]:hover {
 input[type=range] {
     -webkit-appearance: none;
     border: 1px solid white;
-    width: 300px;
+    width: 100%;
 }
 input[type=range]::-webkit-slider-runnable-track {
-    width: 300px;
+    width: 100%;
     height: 5px;
     background: #4d78bc;
     border: none;
@@ -116,7 +156,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 }
 
 input[type=range]::-moz-range-track {
-    width: 300px;
+    width: 100%;
     height: 5px;
     background: #4d78bc;
     border: none;
@@ -136,7 +176,7 @@ input[type=range]:-moz-focusring{
 }
 
 input[type=range]::-ms-track {
-    width: 300px;
+    width: 100%;
     height: 5px;
     background: transparent;
     border-color: transparent;
@@ -172,16 +212,28 @@ the stacking order, position, padding, and overflow-x for the edges.
 .sidenav {
     display: none;
     height: 100%;
-    width: 400px;
+    width: 300px;
     position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
+    border-width: thick;
     background-color: #ebeff4;
     overflow-x: hidden;
-    padding-top: 40px;
+    padding-right: 20px;
     padding-left: 10px;
-    padding-right: 10px;
+    padding-top: 20px;
+}
+/*
+
+*/
+.sidenavtirm {
+  height: 100%;
+  width: 10px;
+  background-color: #4d78bc;
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }
 /*
 anchor elements that are in the sidenav will have the 8,8,8,32px padding and 25px Lato font.

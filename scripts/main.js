@@ -1,15 +1,11 @@
-/* openMenu for openning the menu */
-function openMenu() {
-   document.getElementById("menu").style.display = "block";
-}
-/* closeMenu for closing the menu */
-function closeMenu() {
-   document.getElementById("menu").style.display = "none";
-}
+$(document).ready(function(){
 
-function getFlightID(){
-   //grab flight info for the flight
-}
+  $("#go").click(function() {
+    var flight = $('#flight').val();
+    var location = $('#location').val();
+    window.location = 'map.html?flight=' + flight + '&location=' + location;
+    $("#flight").val("");
+    $("#location").val("");
+  });
 
-
-
+});

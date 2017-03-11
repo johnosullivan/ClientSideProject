@@ -6,52 +6,29 @@
 <link rel="stylesheet" href="style/home.css">
 </head>
 <body id="bodyID">
-<!---
- Used this guy for the google maps plugin to use gmaps
-to map th route
-http://tilotiti.github.io/jQuery-Google-Map/
--->
 <nav>
   <ul>
-  <li><a href="#home"><strong>Github</strong></a></li>
+  <li><a href="https://github.com/johnosullivan/ClientSideProject"><strong>Github</strong></a></li>
   <li><a href="#about"><strong>About</strong></a></li>
   </ul>
 </nav>
-
 <main>
-
-
+  <label class="title">Go</label>
   <form action="/action_page.php">
-      <label for="fname"><strong>Flight ID</strong></label>
-      <input type="text" id="fname" name="firstname" placeholder="flight">
-      <label for="lname"><strong>Where are you leaving from?</strong></label>
-      <input type="text" id="lname" name="lastname" placeholder="your location">
-      <input type="submit" value="Go">
+      <input type="text" id="flight" name="flight" placeholder="flight #">
+      <br>
+      <br>
+      <input type="text" id="location" name="location" placeholder="where are you coming from?">
+      <br>
+      <br>
+      <input id="go" type="button" value="Go">
   </form>
-
-
 </main>
-<!--<script src="javascripts/jquery.js"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR-API-KEY"></script>
-<script type="text/javascript" src="javascripts/jquery.googlemap.js"></script>-->
-
-<script type="text/javascript">
-    var imgCount = 3;
-    var dir = 'images/';
-    var randomCount = Math.round(Math.random() * (imgCount - 1)) + 1;
-    var images = new Array
-    images[1] = "chicago.jpg",
-    images[2] = "chicago.jpg",
-    images[3] = "chicago.jpg";
-    document.getElementById("bodyID").style.backgroundImage = "url(" + dir + images[randomCount] + ")";
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous">
 </script>
-
+<script src="scripts/main.js"></script>
 </body>
-
 </html>
-
-<!--TODO: add "go button" to home page -->
-<!--TODO: add "go" button to gmaps page -->
-<!--TODO: make images background of hme page -->
-<!--TODO: add "enter flight code here in entry field of home-->
-<!--TODO: the maps page in its entirity-->

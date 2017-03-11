@@ -1,5 +1,5 @@
 body {
-    background-image:
+    /*background-image:
     /*https://www.w3schools.com/css/css_background.asp*/
     /*background-image: url("")*/
     /*font-family: "Lato", sans-serif;*/
@@ -9,12 +9,11 @@ body {
 .title{
     text-align: center;
     position: fixed;
-    font-family: 'fontawesome', Georgia, Serif;
+    font-family: Georgia, Serif;
     font-src: fontawesome-webfont;
     /*scr: url(fontawesome.woff);*/
     text-rendering: optimizeLegibility;
     height: inherit;
-    font-size: 1.5em;
     line-height: 1rem;
 }
 /*Should be in the lower middle of the page i
