@@ -1,44 +1,48 @@
-/* Always set the map height explicitly to define the size of the div
- * element that contains the map. */
-#map {
-  height: 100%;
-}
-
-
+/* style for the body */
 html, body {
   height: 100%;
   margin: 0;
   padding: 0px;
   border-color: gray;
 }
-
+/* Always set the map height explicitly to define the size of the div
+ * element that contains the map. */
+#map {
+  height: 100%;
+}
+/* for the nav bar on the map page */
 nav {
   padding-left: 5px;
   padding-right: 5px;
   padding-bottom: 4px;
   background-color: #4d78bc;
 }
-
+/* for any labels that are not custom to be light gray */
 label {
   color: lightgray;
 }
-
+/* for any header 1 that are not custom to be #4d78bc */
 h1 {
   color: #4d78bc;
 }
-
+/* for any header 2 that are not custom to be black */
 h2 {
   color: black;
 }
-
+/* for the loading spinner div */
 .loading {
+  /* creates the border of the spiner */
   border: 16px solid #f3f3f3;
+  /* creates a circle */
   border-radius: 50%;
   border-top: 16px solid #4d78bc;
+  /* defines width and height */
   width: 120px;
   height: 120px;
+  /* defines the animation */
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
+  /* defines location on the screen */
   position: absolute;
   overflow: show;
   margin: auto;
@@ -48,37 +52,31 @@ h2 {
   right: 0;
 }
 
+/* defines the animations the loading can use to spin 360 degree */
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
   100% { -webkit-transform: rotate(360deg); }
 }
-
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
+/* label for the names */
 .labelname {
   width: 100%;
   font-size:16px;
   padding: 0px 0px 0px 0px;
   color: #4d78bc;
 }
-
-.labelgo {
-  width: 100%;
-  font-size:26px;
-  padding: 0px 0px 0px 0px;
-  color: #4d78bc;
-}
-
+/* label for the value */
 .labelvalue {
   width: 100%;
   font-size:16px;
   padding: 0px 0px 0px 0px;
   color: black;
 }
-
+/* the style for the inner div on the sidebar */
 .sidenavtop {
   width: 100%;
   height:  95%;
@@ -88,25 +86,13 @@ h2 {
   display: block;
   transition: 0.3s
 }
-
+/* for the label located in the sidenavtop div */
 .sidenavtop label {
   width: 100%;
   font-size:16px;
   padding: 0px 0px 0px 0px;
 }
-.title{
-    text-align: center;
-    position: fixed;
-    font-family: 'fontawesome', Georgia, Serif;
-    font-src: fontawesome-webfont;
-    /*scr: url(fontawesome.woff);*/
-    text-rendering: optimizeLegibility;
-    height: inherit;
-    font-size: 1.5em;
-    line-height: 1rem;
-}
-
-
+/* */
 input[type=text], select {
     width: 100%;
     font-size:15px;
@@ -114,7 +100,7 @@ input[type=text], select {
     display: inline-block;
     box-sizing: border-box;
 }
-
+/* */
 input[type=button] {
     width: 100%;
     background-color: lightgray;
@@ -123,10 +109,11 @@ input[type=button] {
     border: none;
     cursor: pointer;
 }
-
+/* */
 input[type=button]:hover {
     background-color: white;
 }
+/* */
 input[type=range] {
     -webkit-appearance: none;
     border: 1px solid white;
@@ -139,6 +126,7 @@ input[type=range]::-webkit-slider-runnable-track {
     border: none;
     border-radius: 3px;
 }
+/* */
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     border: none;
@@ -148,13 +136,15 @@ input[type=range]::-webkit-slider-thumb {
     background: #4d78bc;
     margin-top: -4px;
 }
+/* */
 input[type=range]:focus {
     outline: none;
 }
+/* */
 input[type=range]:focus::-webkit-slider-runnable-track {
     background: #4d78bc;
 }
-
+/* */
 input[type=range]::-moz-range-track {
     width: 100%;
     height: 5px;
@@ -162,6 +152,7 @@ input[type=range]::-moz-range-track {
     border: none;
     border-radius: 3px;
 }
+/* */
 input[type=range]::-moz-range-thumb {
     border: none;
     height: 16px;
@@ -169,12 +160,12 @@ input[type=range]::-moz-range-thumb {
     border-radius: 50%;
     background: #4d78bc;
 }
-
+/* */
 input[type=range]:-moz-focusring{
     outline: 1px solid white;
     outline-offset: -1px;
 }
-
+/* */
 input[type=range]::-ms-track {
     width: 100%;
     height: 5px;
@@ -183,14 +174,17 @@ input[type=range]::-ms-track {
     border-width: 6px 0;
     color: transparent;
 }
+/* */
 input[type=range]::-ms-fill-lower {
     background: #777;
     border-radius: 10px;
 }
+/* */
 input[type=range]::-ms-fill-upper {
     background: #ddd;
     border-radius: 10px;
 }
+/* */
 input[type=range]::-ms-thumb {
     border: none;
     height: 16px;
@@ -198,9 +192,11 @@ input[type=range]::-ms-thumb {
     border-radius: 50%;
     background: goldenrod;
 }
+/* */
 input[type=range]:focus::-ms-fill-lower {
     background: #888;
 }
+/* */
 input[type=range]:focus::-ms-fill-upper {
     background: #ccc;
 }
