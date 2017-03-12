@@ -1,12 +1,17 @@
 $(document).ready(function(){
+
+  //Logic for the go app.
+  //Variables for the app.
+  var apikey = 'AIzaSyC_ep81AybHxhf6J3pc2eJ-AFEbxQ1cMbI';
+  var debugging = true;
+  var currenteta = 0;
+
   //UI setup
   //Trigger when slider is moved
   $("#slider").change(function(){
     //Gets the value and sets updated text to buffer
     $("#bufferlabel").text("Buffer " + $("#slider").val() + " mins");
   });
-  var apikey = 'AIzaSyC_ep81AybHxhf6J3pc2eJ-AFEbxQ1cMbI';
-  var debugging = true;
   //function will parse the url parameters and return the data.
   $.parameter = function(name){
 	  var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
@@ -136,5 +141,4 @@ $(document).ready(function(){
   $('#closeMenu').click(function() {
     document.getElementById("menu").style.display = "none";
   });
-
 });
