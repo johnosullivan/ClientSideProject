@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+  // Grab the data from the input fields and build the url to set as location
   $("#go").click(function() {
     var flight = $('#flight').val();
     var location = $('#location').val();
@@ -7,5 +8,6 @@ $(document).ready(function(){
     $("#flight").val("");
     $("#location").val("");
   });
+  
 
 });

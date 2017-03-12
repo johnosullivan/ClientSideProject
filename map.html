@@ -25,9 +25,9 @@
    <content class="sidenavtop">
      <!-- -->
      <label class="labelname" for="labelflight"><strong>Flight ID:</strong></label>
-     <input type="text" id="flight" name="flight" placeholder="flight" value="SWA1202">
+     <input type="text" id="flight" name="flight" placeholder="flight" value="">
      <label class="labelname" for="labelflight"><strong>Your Location:</strong></label>
-     <input type="text" id="youlocation" name="youlocation" placeholder="your location" value="723 Ouilmette, Ln Wilmette 60091">
+     <input type="text" id="youlocation" name="youlocation" placeholder="your location" value="">
      <!-- Displays the flight and traffic info  -->
      <label class="labelname" for="flight"><strong>Flight #:</strong></label>
      <br>
@@ -76,9 +76,7 @@
   <script src="scripts/map.js"></script>
   <script type="text/javascript">
   function initMap() {
-    var location = {lat: 41.885452, lng: -87.619921};
-    var map = new google.maps.Map(document.getElementById('map'), { zoom: 11, center: location });
-    var marker = new google.maps.Marker({ position: location, map: map });
+    
   }
   </script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_ep81AybHxhf6J3pc2eJ-AFEbxQ1cMbI&callback=initMap"></script>

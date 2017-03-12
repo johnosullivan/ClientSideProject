@@ -1,96 +1,83 @@
 body {
-    /*background-image:
-    /*https://www.w3schools.com/css/css_background.asp*/
-    /*background-image: url("")*/
-    /*font-family: "Lato", sans-serif;*/
-    /*background-color: #dee7ef;*/
-}/* Standard syntax */
+  background: url(../images/chicago.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: right;
+}
 
 .title{
-    text-align: center;
-    position: fixed;
     font-family: Georgia, Serif;
-    font-src: fontawesome-webfont;
-    /*scr: url(fontawesome.woff);*/
-    text-rendering: optimizeLegibility;
-    height: inherit;
-    line-height: 1rem;
+    font-size: 150px;
+    display: block;
+    text-align: center;
+    line-height: 175%;
 }
+
+main {
+  width: 25%;
+	height: 30%;
+	position: absolute;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+  padding: 20px;
+	margin: auto;
+}
+
+main label {
+  color: #4d78bc;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: white;
+    color: #4d78bc;
+}
+
+input[type=text], select {
+    width: 100%;
+    font-size:15px;
+    padding: 10px 10px;
+    display: inline-block;
+    border-radius: 5px;
+    border-color: #4d78bc;
+    box-sizing: border-box;
+}
+
 input[type=button] {
     width: 100%;
-    background-color: lightgray;
+    background-color: #4d78bc;
     color: black;
     padding: 14px 20px;
-    border: none;
+    margin: 8px 0;
+    border-radius: 10px;
+    border-color: #4d78bc;
+    border-width: 0px;
     cursor: pointer;
+    font-weight: bold;
 }
 
 input[type=button]:hover {
     background-color: white;
-}
-/*Should be in the lower middle of the page i
-ballparked the location and size of the box so play with this as you wish.*/
-.google_maps{
-    display: block;
-    background-color: cornflowerblue;
-    border: cornflowerblue;
-    font-family: "futura";
-    font-stretch: ultra-expanded;
-    font-size: .7em;
-    color: white;
-    top: 350px;
-    left: 600px;
-    width: 150px;
-    height: 50px;
-}
-
-/*
-First ruleset for the sidenav class. This ruleset sets the height,width,z-index for
-the stacking order, position, padding, and overflow-x for the edges.
-*/
-.sidenav {
-    display: none;
-    height: 100%;
-    width: 200px;
-    position: fixed;/
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #6d7582;
-    overflow-x: hidden;
-    padding-top: 60px;
-}
-/*
-anchor elements that are in the sidenav will have the 8,8,8,32px padding and 25px Lato font.
-*/
-.sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #FFF;
-    display: block;
-    transition: 0.3s
-}
-/*
-anchor elements pseudo classes will change the color to f1f1f1 on hover.
-*/
-.sidenav a:hover, .offcanvas a:focus{
-    color: #f1f1f1;
-}
-/*
-closebtn within the element sidenav will have an absolute position and a font-size of 36px Lato
-*/
-.sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-}
-/*
-Will change the sidenav padding and sidenav anchor font if width is less the 450px
-*/
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
 }
