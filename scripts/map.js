@@ -74,6 +74,10 @@ $(document).ready(function(){
         var gpslocation = startdata.results[0].geometry.location;
         //Accessing the map element
         var map = new google.maps.Map(document.getElementById('map'), { zoom: 11, center: gpslocation });
+        //Creates the traffic layer
+        var trafficLayer = new google.maps.TrafficLayer();
+        //Sets the layer over the map.
+        trafficLayer.setMap(map);
         //Creates the marker for the starting point
         var marker = new google.maps.Marker({ position: gpslocation, map: map });
         $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + airportcode + '&key=' + apikey, function(airportdata) {
