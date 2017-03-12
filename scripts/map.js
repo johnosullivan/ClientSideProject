@@ -1,44 +1,118 @@
 $(document).ready(function(){
-
+  var apikey = 'AIzaSyC_ep81AybHxhf6J3pc2eJ-AFEbxQ1cMbI';
+  var debugging = true;
   //function will parse the url parameters and return the data.
   $.parameter = function(name){
 	  var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
 	  return results[1] || 0;
   }
-
+  //Debugging function with simple boolean switch
+  function logs(data) {
+    //Writes the data to console.
+    if (debugging) { console.log(data); }
+  }
+  //find the total distance by adding up the routes in response.
+  function totalDistance(result) {
+    //creates a var for total distances
+    var total = 0;
+    //gets all the waypoints
+    var routes = result.routes[0];
+    //adds up all the mirco distances
+    for (var i = 0; i < routes.legs.length; i++) {
+      total += routes.legs[i].distance.value;
+    }
+    //gets the total in km.
+    total = total / 1000;
+    //logs the distance
+    logs(total);
+  }
+  //find the direction via google maps and displays them
+  function findDirection(origin, destination, service, display) {
+    //Creates the route request
+    service.route({
+      origin: origin, //sets the start location
+      destination: destination, //sets the destination
+      waypoints: [{location: origin}, {location: destination}], //sets waypoints
+      travelMode: 'DRIVING', //travel mode set to driving
+      avoidTolls: true //avoid YES please who like toll trolls
+    }, function(response, status) { //callback
+      if (status === 'OK') { // Status 200
+        logs(response); //logs the directions
+        display.setDirections(response); //Writing the maps directions
+        totalDistance(response);
+      } else {
+        //Directions failed
+        alert("Sorry, your location is not supported in Go");
+        $("#loading").hide();
+      }
+    });
+  }
   //the script to get GPS data and plot data
   function running(){
     //Gets the location from the URL
     var location = decodeURI($.parameter('location'));
+    //logs start location
+    logs('Starting point: ' + location);
     //Gets the flight ID from the URL
     var flight = $.parameter('flight');
+    //logs the flight
+    logs('Flight ID: ' + flight)
     //Sets the location and flight ID in the UI
     $('#youlocation').val(location);
     $('#flight').val(flight);
     //Makes the API call to the google API to get lat long of start location
-    $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURIComponent(location) + '&key=AIzaSyC_ep81AybHxhf6J3pc2eJ-AFEbxQ1cMbI', function( data ) {
+    /*
+    * Google Docs
+    * https://developers.google.com/maps/documentation/geocoding/start
+    */
+    var airportcode = 'ORD';
+    $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURIComponent(location) + '&key=' + apikey, function(startdata) {
       //Check if there is a valid address with array coiunt
-      if (data.results.length != 0) {
+      logs(startdata);
+      if (startdata.results.length != 0) {
         //If valid get the gps object
-        var gpsobject = data.results[0].geometry.location;
-        //Create the location marker
-        var location = {lat: gpsobject['lat'], lng: gpsobject['lng']};
+        var gpslocation = startdata.results[0].geometry.location;
         //Accessing the map element
-        var map = new google.maps.Map(document.getElementById('map'), { zoom: 11, center: location });
+        var map = new google.maps.Map(document.getElementById('map'), { zoom: 11, center: gpslocation });
         //Creates the marker for the starting point
-        var marker = new google.maps.Marker({ position: location, map: map });
+        var marker = new google.maps.Marker({ position: gpslocation, map: map });
+        $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + airportcode + '&key=' + apikey, function(airportdata) {
+          logs(airportdata);
+          //Check if there is a valid airportdata
+          if (airportdata.results.length != 0) {
+            //If valid get the gps object
+            var gpsairport = airportdata.results[0].geometry.location;
+            //Sets the airport marker
+            var marker = new google.maps.Marker({ position: gpsairport, map: map });
+            //Start caluating the directions via google maps
+            /*
+            * https://developers.google.com/maps/documentation/javascript/examples/directions-draggable
+            */
+            //Creates the directions services
+            var directionsService = new google.maps.DirectionsService;
+            //Creates the directions rendering object with the draggable set to true and map element
+            var directionsDisplay = new google.maps.DirectionsRenderer({
+              draggable: true,
+              map: map,
+            });
+            //finds the directions
+            findDirection(location, airportcode, directionsService,directionsDisplay);
+            $("#loading").hide();
+          } else {
+            alert("Sorry not valid airport.");
+            $("#loading").hide();
+          }
+        });
       } else {
         //Not valid start address
         alert("Sorry not a valid address!");
+        $("#loading").hide();
       }
       //Hides the spinner since done running
-      $("#loading").hide();
     });
-
   }
   // To simulate the apps finding the data and rendering
   setTimeout(running, 100);
-
   // To trigger once the app sidebar is opened
   $('#openMenu').click(function() {
     document.getElementById("menu").style.display = "block";
