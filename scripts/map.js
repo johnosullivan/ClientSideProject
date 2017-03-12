@@ -1,4 +1,10 @@
 $(document).ready(function(){
+  //UI setup
+  //Trigger when slider is moved
+  $("#slider").change(function(){
+    //Gets the value and sets updated text to buffer
+    $("#bufferlabel").text("Buffer " + $("#slider").val() + " mins");
+  });
   var apikey = 'AIzaSyC_ep81AybHxhf6J3pc2eJ-AFEbxQ1cMbI';
   var debugging = true;
   //function will parse the url parameters and return the data.
@@ -24,7 +30,7 @@ $(document).ready(function(){
     //gets the total in km.
     total = total / 1000;
     //logs the distance
-    logs(total);
+    logs('Distance: ' + total);
   }
   //find the direction via google maps and displays them
   function findDirection(origin, destination, service, display) {
@@ -52,7 +58,7 @@ $(document).ready(function(){
     //Gets the location from the URL
     var location = decodeURI($.parameter('location'));
     //logs start location
-    logs('Starting point: ' + location);
+    logs('Starting Point: ' + location);
     //Gets the flight ID from the URL
     var flight = $.parameter('flight');
     //logs the flight
@@ -88,6 +94,11 @@ $(document).ready(function(){
             var gpsairport = airportdata.results[0].geometry.location;
             //Sets the airport marker
             var marker = new google.maps.Marker({ position: gpsairport, map: map });
+            //Gets the airport shortname
+            var aiportaddress = airportdata.results[0].address_components[0].short_name;
+            logs("Arrival Airport: " + aiportaddress);
+            //Sets UI for arrival
+            $("#arrivalvalue").text("(" + airportcode + ") " + aiportaddress);
             //Start caluating the directions via google maps
             /*
             * https://developers.google.com/maps/documentation/javascript/examples/directions-draggable

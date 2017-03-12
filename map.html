@@ -43,7 +43,7 @@
      <br>
      <label class="labelname" for="arrival"><strong>Arrival Airport:</strong></label>
      <br>
-     <label class="labelvalue" for="arrivalvalue">(ORD) O'Hare International Airport</label>
+     <label id="arrivalvalue" class="labelvalue" for="arrivalvalue">(ORD) O'Hare International Airport</label>
      <br>
      <label class="labelname" for="equipment"><strong>Equipment:</strong></label>
      <br>
@@ -61,9 +61,9 @@
      <br>
      <label class="labelvalue" for="equipmentvalue">High</label>
      <br>
-     <label class="labelname" for="equipment"><strong>Buffer: 0 mins</strong></label>
+     <label id="bufferlabel" class="labelname">Buffer: 0 mins</label>
      <br>
-     <input value="0" type="range">
+     <input id="slider" value="0" type="range">
      <br>
      <br>
    </content>
@@ -76,7 +76,7 @@
   <script src="scripts/map.js"></script>
   <script type="text/javascript">
   function initMap() {
-    
+
   }
   </script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_ep81AybHxhf6J3pc2eJ-AFEbxQ1cMbI&callback=initMap"></script>
