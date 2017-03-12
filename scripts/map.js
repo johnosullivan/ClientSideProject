@@ -5,6 +5,12 @@ $(document).ready(function(){
   var apikey = 'AIzaSyC_ep81AybHxhf6J3pc2eJ-AFEbxQ1cMbI';
   var debugging = true;
   var currenteta = 0;
+  var drivingtime = 0;
+  var drivingdistance = 0;
+
+  //Mock data
+  var flightdelay = 25;
+  var flighteta = 200;
 
   //UI setup
   //Trigger when slider is moved
@@ -24,18 +30,22 @@ $(document).ready(function(){
   }
   //find the total distance by adding up the routes in response.
   function totalDistance(result) {
-    //creates a var for total distances
-    var total = 0;
     //gets all the waypoints
     var routes = result.routes[0];
     //adds up all the mirco distances
     for (var i = 0; i < routes.legs.length; i++) {
-      total += routes.legs[i].distance.value;
+      var leg = routes.legs[i];
+      drivingdistance += leg.distance.value;
+      drivingtime += leg.duration.value;
     }
     //gets the total in km.
-    total = total / 1000;
+    drivingdistance = drivingdistance / 1000;
+    drivingtime = drivingtime / 60;
     //logs the distance
-    logs('Distance: ' + total);
+    logs('Distance: ' + drivingdistance);
+    logs('Duration: ' + drivingtime);
+    //Sets UI
+    $("#drivingtime").text(drivingtime + " mins (" + drivingdistance + " km)");
   }
   //find the direction via google maps and displays them
   function findDirection(origin, destination, service, display) {
@@ -104,6 +114,17 @@ $(document).ready(function(){
             logs("Arrival Airport: " + aiportaddress);
             //Sets UI for arrival
             $("#arrivalvalue").text("(" + airportcode + ") " + aiportaddress);
+
+            //Process Flight Data (Under Construction)
+            /*=======================================*/
+            $("#etavalue").text(flighteta + " mins");
+            if (flightdelay > 0) {
+              $("#delayvalue").text("+" + flightdelay);
+            } else {
+              $("#delayvalue").text("" + flightdelay);
+            }
+            /*=======================================*/
+
             //Start caluating the directions via google maps
             /*
             * https://developers.google.com/maps/documentation/javascript/examples/directions-draggable
