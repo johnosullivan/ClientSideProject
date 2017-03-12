@@ -7,7 +7,8 @@ $(document).ready(function(){
   var currenteta = 0;
   var drivingtime = 0;
   var drivingdistance = 0;
-
+  var buffer = 0;
+  var gotime = 0;
   //Mock data
   var flightdelay = 25;
   var flighteta = 200;
@@ -16,7 +17,11 @@ $(document).ready(function(){
   //Trigger when slider is moved
   $("#slider").change(function(){
     //Gets the value and sets updated text to buffer
-    $("#bufferlabel").text("Buffer " + $("#slider").val() + " mins");
+    var buffervalue = $("#slider").val();
+    $("#bufferlabel").text("Buffer " + buffervalue + " mins");
+    buffer = buffervalue;
+    //updateGoTime after buffer change
+    updateGoTime();
   });
   //function will parse the url parameters and return the data.
   $.parameter = function(name){
@@ -27,6 +32,11 @@ $(document).ready(function(){
   function logs(data) {
     //Writes the data to console.
     if (debugging) { console.log(data); }
+  }
+  //Updates the go time.
+  function updateGoTime() {
+    gotime = flighteta + flightdelay - drivingtime - buffer;
+    $("#govalue").text("Go in " + gotime + " mins");
   }
   //find the total distance by adding up the routes in response.
   function totalDistance(result) {
@@ -46,6 +56,8 @@ $(document).ready(function(){
     logs('Duration: ' + drivingtime);
     //Sets UI
     $("#drivingtime").text(drivingtime + " mins (" + drivingdistance + " km)");
+    //updateGoTime with all data received
+    updateGoTime();
   }
   //find the direction via google maps and displays them
   function findDirection(origin, destination, service, display) {
