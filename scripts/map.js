@@ -36,7 +36,9 @@ $(document).ready(function(){
   //Updates the go time.
   function updateGoTime() {
     gotime = flighteta + flightdelay - drivingtime - buffer;
-    $("#govalue").text("Go in " + gotime + " mins");
+    var now = new Date();
+    now.setMinutes(now.getMinutes() + gotime);
+    $("#govalue").text("Go at:  " + now.toLocaleTimeString());
   }
   //find the total distance by adding up the routes in response.
   function totalDistance(result) {
