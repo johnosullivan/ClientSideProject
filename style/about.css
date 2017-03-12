@@ -1,11 +1,17 @@
+/*Page that specifies the styling componenets
+for the tab in the maps page that shows you all
+flight information */
+
+/*should the page render incorrectly, this image will appear*/
 body {
   background: url(../images/chicago.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
+  -moz-background-size: cover;  /*mozilla firefox*/
+  -o-background-size: cover;    /*opera*/
   background-size: cover;
 }
 
+/*specifies unordered list format for the data*/
 ul {
     list-style-type: none;
     margin: 0;
@@ -46,3 +52,4 @@ li a:hover {
     background-color: white;
     color: #4d78bc;
 }
+

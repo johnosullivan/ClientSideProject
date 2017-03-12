@@ -118,6 +118,7 @@ $(document).ready(function(){
             //finds the directions
             findDirection(location, airportcode, directionsService,directionsDisplay);
             $("#loading").hide();
+            // error message in case airport is unrecognizable
           } else {
             alert("Sorry not valid airport.");
             $("#loading").hide();
