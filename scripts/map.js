@@ -11,9 +11,11 @@ $(document).ready(function(){
   }
   $('#openMenu').click(function() {
     document.getElementById("menu").style.display = "block";
+    //$("#map").width($("#map").width() - 330);
   });
   $('#closeMenu').click(function() {
     document.getElementById("menu").style.display = "none";
+    //$("#map").width($("#map").width() + 330);
   });
 
 });

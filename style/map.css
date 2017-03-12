@@ -216,7 +216,7 @@ the stacking order, position, padding, and overflow-x for the edges.
     border-width: thick;
     background-color: #ebeff4;
     overflow-x: hidden;
-    padding-right: 20px;
+    padding-right: 10px;
     padding-left: 10px;
     padding-top: 20px;
 }
