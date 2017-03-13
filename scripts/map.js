@@ -155,6 +155,7 @@ $(document).ready(function(){
             //finds the directions
             findDirection(location, arrivalairportcode, directionsService,directionsDisplay);
             $("#loading").hide();
+            // error message in case airport is unrecognizable
           } else {
             alert("Sorry not valid airport.");
             $("#loading").hide();

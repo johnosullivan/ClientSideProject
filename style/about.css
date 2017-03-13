@@ -1,18 +1,24 @@
+/*Page that specifies the styling componenets
+for the tab in the maps page that shows you all
+flight information */
+
+/*should the page render incorrectly, this image will appear*/
 body {
   background: url(../images/chicago.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
+  -moz-background-size: cover;  /*mozilla firefox*/
+  -o-background-size: cover;    /*opera*/
   background-size: cover;
 }
 
+/*specifies unordered list format for the data*/
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
 }
-
+/* sets the list location to the right fo the screen */
 li {
     float: right;
 }
@@ -36,6 +42,7 @@ p{
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
+/*Styles the location of the DOM (content(print) etc)*/
 main {
   width: 25%;
 	height: 30%;
@@ -47,11 +54,12 @@ main {
   padding: 20px;
 	margin: auto;
 }
-
+/*color of the main label (about go)*/
 main label {
   color: #4d78bc;
 }
 
+/*styles the content (paragraph)*/
 li a {
     display: block;
     color: white;
@@ -61,7 +69,9 @@ li a {
     text-decoration: none;
 }
 
+/*styles the background of the list items*/
 li a:hover {
     background-color: white;
     color: #4d78bc;
 }
+

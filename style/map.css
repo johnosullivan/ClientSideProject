@@ -35,7 +35,7 @@ h2 {
   font-size:30px;
   padding: 0px 0px 0px 0px;
   color: white;
-  width: 100px
+  width: 100px;
   height: 100px;
   /* defines location on the screen */
   position: absolute;
@@ -112,7 +112,7 @@ h2 {
   font-size:16px;
   padding: 0px 0px 0px 0px;
 }
-/* */
+/*Styling for text inputs (flight number and departure location) */
 input[type=text], select {
     width: 100%;
     font-size:15px;
@@ -120,7 +120,7 @@ input[type=text], select {
     display: inline-block;
     box-sizing: border-box;
 }
-/* */
+/* Styling for close button in the sidenavtop*/
 input[type=button] {
     width: 100%;
     background-color: lightgray;
@@ -129,16 +129,16 @@ input[type=button] {
     border: none;
     cursor: pointer;
 }
-/* */
+/* TODO*/
 input[type=button]:hover {
     background-color: white;
 }
-/* */
+/* Styling for the buffer slider in Chrome*/
 input[type=range] {
     -webkit-appearance: none;
     border: 1px solid white;
     width: 100%;
-}
+
 input[type=range]::-webkit-slider-runnable-track {
     width: 100%;
     height: 5px;
@@ -146,7 +146,7 @@ input[type=range]::-webkit-slider-runnable-track {
     border: none;
     border-radius: 3px;
 }
-/* */
+/* Styling for buffer slider in Chrome */
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     border: none;
@@ -156,15 +156,15 @@ input[type=range]::-webkit-slider-thumb {
     background: #4d78bc;
     margin-top: -4px;
 }
-/* */
+/* Styling for buffer slider in Chrome*/
 input[type=range]:focus {
     outline: none;
 }
-/* */
+/*Styling for buffer slider in Chrome */
 input[type=range]:focus::-webkit-slider-runnable-track {
     background: #4d78bc;
 }
-/* */
+/* Styling for buffer slider in Mozilla firefox*/
 input[type=range]::-moz-range-track {
     width: 100%;
     height: 5px;
@@ -172,7 +172,7 @@ input[type=range]::-moz-range-track {
     border: none;
     border-radius: 3px;
 }
-/* */
+/* Styling for buffer slider in Mozilla firefox*/
 input[type=range]::-moz-range-thumb {
     border: none;
     height: 16px;
@@ -180,12 +180,12 @@ input[type=range]::-moz-range-thumb {
     border-radius: 50%;
     background: #4d78bc;
 }
-/* */
+/* Styling for buffer slider in Mozilla firefox*/
 input[type=range]:-moz-focusring{
     outline: 1px solid white;
     outline-offset: -1px;
 }
-/* */
+/*Styling for buffer slider in IE / Edge */
 input[type=range]::-ms-track {
     width: 100%;
     height: 5px;
@@ -194,17 +194,17 @@ input[type=range]::-ms-track {
     border-width: 6px 0;
     color: transparent;
 }
-/* */
+/* Styling for buffer slider in IE / Edge*/
 input[type=range]::-ms-fill-lower {
     background: #777;
     border-radius: 10px;
 }
-/* */
+/* Styling for buffer slider in IE / Edge*/
 input[type=range]::-ms-fill-upper {
     background: #ddd;
     border-radius: 10px;
 }
-/* */
+/* Styling for buffer slider in IE / Edge*/
 input[type=range]::-ms-thumb {
     border: none;
     height: 16px;
@@ -212,17 +212,17 @@ input[type=range]::-ms-thumb {
     border-radius: 50%;
     background: goldenrod;
 }
-/* */
+/* Styling for buffer slider in IE / Edge*/
 input[type=range]:focus::-ms-fill-lower {
     background: #888;
 }
-/* */
+/* Styling for buffer slider in IE / Edge*/
 input[type=range]:focus::-ms-fill-upper {
     background: #ccc;
 }
 
 /*
-First ruleset for the sidenav class. This ruleset sets the height,width,z-index for
+First ruleset for the sidenav class. This ruleset sets the height, width, z-index for
 the stacking order, position, padding, and overflow-x for the edges.
 */
 .sidenav {
@@ -241,9 +241,10 @@ the stacking order, position, padding, and overflow-x for the edges.
     padding-top: 40px;
 }
 /*
-
+Styles the sidenav to span the whole right side of the page but not only reach
+10 px into the page
 */
-.sidenavtirm {
+.sidenavtrim {
   height: 100%;
   width: 10px;
   background-color: #4d78bc;

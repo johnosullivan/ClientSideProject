@@ -1,3 +1,6 @@
+
+/*sets background to img, will eventually show the */
+/*image of the city in which user is located*/
 body {
   background: url(../images/chicago.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -5,18 +8,18 @@ body {
   -o-background-size: cover;
   background-size: cover;
 }
-
+/*styles DOM box features of unordered list*/
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
 }
-
+/*styles list items */
 li {
     float: right;
 }
-
+/*set font, color, sizez, alignment of title*/
 .title{
     font-family: Georgia, Serif;
     font-size: 150px;
@@ -24,7 +27,7 @@ li {
     text-align: center;
     line-height: 175%;
 }
-
+/*positioning of main DOM item*/
 main {
   width: 25%;
 	height: 30%;
@@ -36,11 +39,12 @@ main {
   padding: 20px;
 	margin: auto;
 }
-
+/*sets color of main item*/
 main label {
   color: #4d78bc;
 }
-
+/*sets item of decor (display, color, align etc) of each list item*/
+/*(text entry field)*/
 li a {
     display: block;
     color: white;
@@ -49,12 +53,12 @@ li a {
     border-radius: 10px;
     text-decoration: none;
 }
-
+/*edits hover display*/
 li a:hover {
     background-color: white;
     color: #4d78bc;
 }
-
+/*styles entry field for the location and flight info*/
 input[type=text], select {
     width: 100%;
     font-size:15px;
@@ -65,6 +69,7 @@ input[type=text], select {
     box-sizing: border-box;
 }
 
+/*styles the Go! button*/
 input[type=button] {
     width: 100%;
     background-color: #4d78bc;
@@ -78,6 +83,7 @@ input[type=button] {
     font-weight: bold;
 }
 
+/*styles the hover display over item*/
 input[type=button]:hover {
     background-color: white;
 }
