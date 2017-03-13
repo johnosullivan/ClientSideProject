@@ -241,7 +241,8 @@ the stacking order, position, padding, and overflow-x for the edges.
     padding-top: 40px;
 }
 /*
-
+Styles the sidenav to span the whole right side of the page but not only reach
+10 px into the page
 */
 .sidenavtrim {
   height: 100%;
