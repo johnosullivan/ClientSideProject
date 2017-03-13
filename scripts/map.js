@@ -108,7 +108,7 @@ $(document).ready(function(){
     /*=======================================*/
     arrivalairportcode = 'ORD';
     departureairportcode = '';
-    
+
     //Makes the API call to the google API to get lat long of start location
     /*
     * Google Docs
