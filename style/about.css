@@ -16,6 +16,25 @@ ul {
 li {
     float: right;
 }
+/*Specify the text style of the about page title*/
+.title {
+    font-family: Georgia, Serif;
+    font-size: 80px;
+    display:  block;
+    text-align: center;
+    line-height: 110%;
+    color: #4d78bc
+}
+/*Specify the text style of the About paragraph - white font with black border so it can easily be seen on the background and smaller than the title*/
+p{
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+  display: block;
+  text-align: center;
+  line-height: 110%;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
 
 main {
   width: 25%;

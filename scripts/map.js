@@ -19,7 +19,7 @@ $(document).ready(function(){
   $("#slider").change(function(){
     //Gets the value and sets updated text to buffer
     var buffervalue = $("#slider").val();
-    $("#bufferlabel").text("Buffer " + buffervalue + " mins");
+    $("#bufferlabel").text("Buffer: " + buffervalue + " mins");
     buffer = buffervalue;
     //updateGoTime after buffer change
     updateGoTime();
