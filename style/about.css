@@ -18,11 +18,12 @@ ul {
     padding: 0;
     overflow: hidden;
 }
-
+/* sets the list location to the right fo the screen */
 li {
     float: right;
 }
 
+/*Styles the location of the DOM (content(print) etc)*/
 main {
   width: 25%;
 	height: 30%;
@@ -34,11 +35,12 @@ main {
   padding: 20px;
 	margin: auto;
 }
-
+/*color of the main label (about go)*/
 main label {
   color: #4d78bc;
 }
 
+/*styles the content (paragraph)*/
 li a {
     display: block;
     color: white;
@@ -48,6 +50,7 @@ li a {
     text-decoration: none;
 }
 
+/*styles the background of the list items*/
 li a:hover {
     background-color: white;
     color: #4d78bc;
