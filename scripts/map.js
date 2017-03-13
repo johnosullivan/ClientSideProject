@@ -58,7 +58,7 @@ $(document).ready(function(){
     logs('Distance: ' + drivingdistance);
     logs('Duration: ' + drivingtime);
     //Sets UI
-    $("#drivingtime").text(drivingtime + " mins (" + drivingdistance + " km)");
+    $("#drivingtime").text(Math.round(drivingtime) + " mins (" + drivingdistance + " km)");
     //updateGoTime with all data received
     updateGoTime();
   }
