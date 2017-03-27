@@ -10,9 +10,10 @@ $(document).ready(function(){
   var buffer = 0;
   var gotime = 0;
   //Mock data
-  var flightdelay = 25;
-  var flighteta = 200;
-
+  var flightdelay = 25.5;
+  var flighteta = 120;
+  var arrivalairportcode = 'ORD';
+  var departureairportcode = '';
   //UI setup
   //Trigger when slider is moved
   $("#slider").change(function(){
@@ -36,7 +37,9 @@ $(document).ready(function(){
   //Updates the go time.
   function updateGoTime() {
     gotime = flighteta + flightdelay - drivingtime - buffer;
-    $("#govalue").text("Go in " + gotime + " mins");
+    var now = new Date();
+    now.setMinutes(now.getMinutes() + gotime);
+    $("#govalue").text("Go at:  " + now.toLocaleTimeString());
   }
   //find the total distance by adding up the routes in response.
   function totalDistance(result) {
@@ -55,7 +58,7 @@ $(document).ready(function(){
     logs('Distance: ' + drivingdistance);
     logs('Duration: ' + drivingtime);
     //Sets UI
-    $("#drivingtime").text(drivingtime + " mins (" + drivingdistance + " km)");
+    $("#drivingtime").text(Math.round(drivingtime) + " mins (" + drivingdistance + " km)");
     //updateGoTime with all data received
     updateGoTime();
   }
@@ -93,12 +96,24 @@ $(document).ready(function(){
     //Sets the location and flight ID in the UI
     $('#youlocation').val(location);
     $('#flight').val(flight);
+
+    //Process Flight Data (Under Construction)
+    /*=======================================*/
+    $("#etavalue").text(flighteta + " mins");
+    if (flightdelay > 0) {
+      $("#delayvalue").text("+" + flightdelay);
+    } else {
+      $("#delayvalue").text("" + flightdelay);
+    }
+    /*=======================================*/
+    arrivalairportcode = 'ORD';
+    departureairportcode = '';
+
     //Makes the API call to the google API to get lat long of start location
     /*
     * Google Docs
     * https://developers.google.com/maps/documentation/geocoding/start
     */
-    var airportcode = 'ORD';
     $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURIComponent(location) + '&key=' + apikey, function(startdata) {
       //Check if there is a valid address with array coiunt
       logs(startdata);
@@ -113,7 +128,7 @@ $(document).ready(function(){
         trafficLayer.setMap(map);
         //Creates the marker for the starting point
         var marker = new google.maps.Marker({ position: gpslocation, map: map });
-        $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + airportcode + '&key=' + apikey, function(airportdata) {
+        $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + arrivalairportcode + '&key=' + apikey, function(airportdata) {
           logs(airportdata);
           //Check if there is a valid airportdata
           if (airportdata.results.length != 0) {
@@ -125,18 +140,7 @@ $(document).ready(function(){
             var aiportaddress = airportdata.results[0].address_components[0].short_name;
             logs("Arrival Airport: " + aiportaddress);
             //Sets UI for arrival
-            $("#arrivalvalue").text("(" + airportcode + ") " + aiportaddress);
-
-            //Process Flight Data (Under Construction)
-            /*=======================================*/
-            $("#etavalue").text(flighteta + " mins");
-            if (flightdelay > 0) {
-              $("#delayvalue").text("+" + flightdelay);
-            } else {
-              $("#delayvalue").text("" + flightdelay);
-            }
-            /*=======================================*/
-
+            $("#arrivalvalue").text("(" + arrivalairportcode + ") " + aiportaddress);
             //Start caluating the directions via google maps
             /*
             * https://developers.google.com/maps/documentation/javascript/examples/directions-draggable
@@ -149,8 +153,9 @@ $(document).ready(function(){
               map: map,
             });
             //finds the directions
-            findDirection(location, airportcode, directionsService,directionsDisplay);
+            findDirection(location, arrivalairportcode, directionsService,directionsDisplay);
             $("#loading").hide();
+            // error message in case airport is unrecognizable
           } else {
             alert("Sorry not valid airport.");
             $("#loading").hide();
