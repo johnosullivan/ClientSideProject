@@ -22,32 +22,34 @@ li {
 /*set font, color, sizez, alignment of title*/
 .title{
     font-family: Georgia, Serif;
-    font-size: 150px;
+    font-size: 125px;
     display: block;
     text-align: center;
-    line-height: 175%;
+    line-height: 150%;
 }
 /*positioning of main DOM item*/
 main {
   width: 25%;
 	height: 30%;
 	position: absolute;
-	top:0;
-	bottom: 100;
-	left: 0;
-	right: 0;
-  padding: 20px;
+	top:0px;
+	bottom: 150px;
+	left: 0px;
+	right: 0px;
+    padding: 20px;
 	margin: auto;
 }
 /*sets color of main item*/
 main label {
   color: #4d78bc;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 /*sets item of decor (display, color, align etc) of each list item*/
 /*(text entry field)*/
 li a {
     display: block;
     color: white;
+    text-shadow: -.5px 0 black, 0 .5px black, .5px 0 black, 0 -.5px black;
     text-align: center;
     padding: 14px 16px;
     border-radius: 10px;
@@ -56,6 +58,7 @@ li a {
 /*edits hover display*/
 li a:hover {
     background-color: white;
+    text-shadow: none;
     color: #4d78bc;
 }
 /*styles entry field for the location and flight info*/
