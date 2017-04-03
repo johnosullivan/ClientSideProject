@@ -13,7 +13,8 @@ var express = require("express"),
 var trips = {
     "trips": [{
         "flightID": "ABC123",
-        "startLocation": "6711 N Lakewood Avenue"
+        //TODO: time data type
+        "landingTime": "6711 N Lakewood Avenue"
     }]
 };
 
