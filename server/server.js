@@ -8,20 +8,15 @@
 var express = require("express"),
     http = require("http"),
     //bodyParser = require("body-parser"),
-    testApp;
-
-testApp = express();
-http.createServer(testApp).listen();
+    testApp = express();
+    http.createServer(testApp).listen(3000);
 
 
+    testApp.get("/test_data.json", funtion(req,res){
+        res.json(testSet1);
+})
 
-var trips = {
-    "trips": [{
-        "flightID": "ABC123",
-        //TODO: time data type
-        "landingTime": "6711 N Lakewood Avenue"
-    }]
-};
+
 
 //set as static file server...
 //jsonApp.use(express.static(__dirname + "/app"));
