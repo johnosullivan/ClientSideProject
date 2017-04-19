@@ -11,9 +11,8 @@ var express = require("express"),
     testApp = express();
     http.createServer(testApp).listen(3000);
 
-
     testApp.get("/test_data.json", funtion(req,res){
-        res.json(testSet1);
+    res.json(testSet1);
 })
 
 
