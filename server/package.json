@@ -6,9 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "John O'Sullivan",
+  "author": "John O'Sullivan and Katie Eaton",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "jQuery": "^1.7.4",
+    "jsdom": "^9.12.0",
+    "promise": "^7.1.1",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.0"
   }
 }

@@ -23,5 +23,3 @@ __SUPPORTED BROWSERS__
 * Chrome
 * Microsoft Browsers (Internet Explorer, Edge)
 * Mozilla Firefox
-
-
