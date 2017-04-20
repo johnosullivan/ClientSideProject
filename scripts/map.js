@@ -1,6 +1,4 @@
-
 $(document).ready(function(){
-
   //Logic for the go app.
   //Variables for the app.
   var apikey = 'AIzaSyC_ep81AybHxhf6J3pc2eJ-AFEbxQ1cMbI';
@@ -15,6 +13,16 @@ $(document).ready(function(){
   var flighteta = 120;
   var arrivalairportcode = 'ORD';
   var departureairportcode = '';
+  //Function for angle caluation for flight icon rotation
+  degrFrom_rad = function(rad) { return rad * 180 / Math.PI; }
+  radFrom_degr  = function(degr) { return degr * Math.PI / 180; }
+  getAngle = function(startLat,startLong,endLat,endLong){
+    startLat = radFrom_degr(startLat), startLong = radFrom_degr(startLong), endLat = radFrom_degr(endLat), endLong = radFrom_degr(endLong);
+    var x = endLong - startLong;
+    var a = Math.log(Math.tan(endLat/2.0+Math.PI/4.0)/Math.tan(startLat/2.0+Math.PI/4.0));
+    if (Math.abs(x) > Math.PI){ if (x > 0.0) { x = -(2.0 * Math.PI - x); } else {  x = (2.0 * Math.PI + x); } }
+    return (degrFrom_rad(Math.atan2(x, a)) + 360.0) % 360.0;
+  }
   //UI setup
   //Trigger when slider is moved
   $("#slider").change(function(){
@@ -85,63 +93,32 @@ $(document).ready(function(){
     });
   }
 
-  function setupUI(data) {
-    console.log(data);
+  function processData(data) {
+    //Logs flight to console
+    logs(data);
+    //Sets the flight information from the data to the UI labels
     $('#flight').val(data['displayIdent']);
     $('#airlinevalue').text(data['airline']['shortName']);
     $('#airlinenumber').text(data['codeShare']['friendlyIdent']);
     $('#equipmentvalue').text(data['aircraft']['friendlyType']);
     $('#arrivalvalue').text(data['destination']['friendlyName'])
     $('#departurevalue').text(data['origin']['friendlyName'])
-    $("#loading").hide();
 
+    var estimated= new Date(data['landingTimes']['estimated']*1000);
+    var scheduled= new Date(data['landingTimes']['scheduled']*1000);
+    logs(estimated.toString());
+    logs(scheduled.toString());
+    $('#etavalue').text(estimated.toString());
 
-    
-  }
-  //the script to get GPS data and plot data
-  function running(){
-    //Gets the location from the URL
-    var location = decodeURI($.parameter('location'));
-    $('#youlocation').val(location);
-    //logs start location
-    logs('Starting Point: ' + location);
-    //Gets the flight ID from the URL
-    var flight = $.parameter('flight');
-
-    $.ajax({
-        type: "GET",
-        url: "http://localhost:8080/api/flight/" + flight,
-        crossDomain : true,
-    }).done(function(data) {
-      setupUI(data['flightdata']);
-    }).fail( function(xhr, textStatus, errorThrown) {
-      alert("KJ");
-    });
-
-    //logs the flight
-    logs('Flight ID: ' + flight)
-    //Sets the location and flight ID in the UI
-    //
-    //$('#flight').val(flight);
-
-    //Process Flight Data (Under Construction)
-    /*=======================================*/
-    /*$("#etavalue").text(flighteta + " mins");
-    if (flightdelay > 0) {
-      $("#delayvalue").text("+" + flightdelay);
-    } else {
-      $("#delayvalue").text("" + flightdelay);
-    }*/
-    /*=======================================*/
-    //arrivalairportcode = 'ORD';
-    //departureairportcode = '';
-
+    arrivalairportcode = data['destination']['iata'];
     //Makes the API call to the google API to get lat long of start location
     /*
     * Google Docs
     * https://developers.google.com/maps/documentation/geocoding/start
     */
-    /*$.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURIComponent(location) + '&key=' + apikey, function(startdata) {
+    var location = decodeURI($.parameter('location'));
+    $('#youlocation').val(location);
+    $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURIComponent(location) + '&key=' + apikey, function(startdata) {
       //Check if there is a valid address with array coiunt
       logs(startdata);
       if (startdata.results.length != 0) {
@@ -168,8 +145,44 @@ $(document).ready(function(){
             logs("Arrival Airport: " + aiportaddress);
             //Sets UI for arrival
             $("#arrivalvalue").text("(" + arrivalairportcode + ") " + aiportaddress);
+            //Waypoints of filed flight plane
+            var waypoints = data['waypoints'];
+            var flightPlanCoordinates = [];
+            //Formats the data for google maps
+            for (var i = 0, j = waypoints.length; i < j; i += 1) {
+              var point = waypoints[i];
+              flightPlanCoordinates.push({lat: point[1], lng: point[0]});
+            }
+            //Creates the polyline to set to the maps object
+            var flightPath = new google.maps.Polyline({
+              path: flightPlanCoordinates, geodesic: true, strokeColor: '#FFF', strokeOpacity: 1.0, strokeWeight: 4
+            });
+            flightPath.setMap(map);
+            //Current waypoint from the actual flight
+            var waypointtrack = data['track'];
+            var flightPlanCoordinatetrack = [];
+            //Formats the data for google maps
+            for (var i = 0, j = waypointtrack.length; i < j; i += 1) {
+              var point = waypointtrack[i].coord;
+              flightPlanCoordinatetrack.push({lat: point[1], lng: point[0]});
+            }
+            //Creates the polyline to set to the maps object
+            var flightPathTrack = new google.maps.Polyline({
+              path: flightPlanCoordinatetrack, geodesic: true, strokeColor: '#333', strokeOpacity: 1.0, strokeWeight: 4
+            });
+            flightPathTrack.setMap(map);
+            //Gets the last two plane waypoint to find angle to turn icon marker
+            var lastItem = waypointtrack.pop();
+            var secondlastItem = waypointtrack[waypointtrack.length - 1];
+            var angle = getAngle(secondlastItem.coord[0],secondlastItem.coord[1],lastItem.coord[0],lastItem.coord[1]);
+            //Plane icon with it svg data
+            var plane = {
+                path: 'M510,255c0-20.4-17.85-38.25-38.25-38.25H331.5L204,12.75h-51l63.75,204H76.5l-38.25-51H0L25.5,255L0,344.25h38.25 l38.25-51h140.25l-63.75,204h51l127.5-204h140.25C492.15,293.25,510,275.4,510,255z',
+                fillColor: 'black',fillOpacity: 0.8,scale: 0.1,strokeColor: 'black',strokeWeight: 1,anchor: new google.maps.Point(10, 250),rotation: angle
+            };
+            //Sets the plane marks for where it is located
+            var marker = new google.maps.Marker({ position: {lat: lastItem.coord[1], lng: lastItem.coord[0]}, map: map, title: 'Plane Current Location',icon: plane });
             //Start caluating the directions via google maps
-
             //Creates the directions services
             var directionsService = new google.maps.DirectionsService;
             //Creates the directions rendering object with the draggable set to true and map element
@@ -193,10 +206,22 @@ $(document).ready(function(){
       }
       //Hides the spinner since done running
     });
-*/
+
+  }
+  //the script to get GPS data and plot data
+  function processing(){
+    //Gets the flight ID from the URL
+    var flight = $.parameter('flight');
+    $.ajax({
+        type: "GET", url: "http://localhost:8080/api/flight/" + flight, crossDomain : true
+    }).done(function(data) {
+      processData(data['flightdata']);
+    }).fail( function(xhr, textStatus, errorThrown) {
+      alert("KJ");
+    });
   }
   // To simulate the apps finding the data and rendering
-  setTimeout(running, 100);
+  setTimeout(processing, 100);
   // To trigger once the app sidebar is opened
   $('#openMenu').click(function() {
     document.getElementById("menu").style.display = "block";
