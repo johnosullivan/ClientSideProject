@@ -84,38 +84,64 @@ $(document).ready(function(){
       }
     });
   }
+
+  function setupUI(data) {
+    console.log(data);
+    $('#flight').val(data['displayIdent']);
+    $('#airlinevalue').text(data['airline']['shortName']);
+    $('#airlinenumber').text(data['codeShare']['friendlyIdent']);
+    $('#equipmentvalue').text(data['aircraft']['friendlyType']);
+    $('#arrivalvalue').text(data['destination']['friendlyName'])
+    $('#departurevalue').text(data['origin']['friendlyName'])
+    $("#loading").hide();
+
+
+    
+  }
   //the script to get GPS data and plot data
   function running(){
     //Gets the location from the URL
     var location = decodeURI($.parameter('location'));
+    $('#youlocation').val(location);
     //logs start location
     logs('Starting Point: ' + location);
     //Gets the flight ID from the URL
     var flight = $.parameter('flight');
+
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/api/flight/" + flight,
+        crossDomain : true,
+    }).done(function(data) {
+      setupUI(data['flightdata']);
+    }).fail( function(xhr, textStatus, errorThrown) {
+      alert("KJ");
+    });
+
     //logs the flight
     logs('Flight ID: ' + flight)
     //Sets the location and flight ID in the UI
-    $('#youlocation').val(location);
-    $('#flight').val(flight);
+    //
+    //$('#flight').val(flight);
 
     //Process Flight Data (Under Construction)
     /*=======================================*/
-    $("#etavalue").text(flighteta + " mins");
+    /*$("#etavalue").text(flighteta + " mins");
     if (flightdelay > 0) {
       $("#delayvalue").text("+" + flightdelay);
     } else {
       $("#delayvalue").text("" + flightdelay);
-    }
+    }*/
     /*=======================================*/
-    arrivalairportcode = 'ORD';
-    departureairportcode = '';
+    //arrivalairportcode = 'ORD';
+    //departureairportcode = '';
 
     //Makes the API call to the google API to get lat long of start location
     /*
     * Google Docs
     * https://developers.google.com/maps/documentation/geocoding/start
     */
-    $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURIComponent(location) + '&key=' + apikey, function(startdata) {
+    /*$.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURIComponent(location) + '&key=' + apikey, function(startdata) {
       //Check if there is a valid address with array coiunt
       logs(startdata);
       if (startdata.results.length != 0) {
@@ -143,9 +169,7 @@ $(document).ready(function(){
             //Sets UI for arrival
             $("#arrivalvalue").text("(" + arrivalairportcode + ") " + aiportaddress);
             //Start caluating the directions via google maps
-            /*
-            * https://developers.google.com/maps/documentation/javascript/examples/directions-draggable
-            */
+
             //Creates the directions services
             var directionsService = new google.maps.DirectionsService;
             //Creates the directions rendering object with the draggable set to true and map element
@@ -169,6 +193,7 @@ $(document).ready(function(){
       }
       //Hides the spinner since done running
     });
+*/
   }
   // To simulate the apps finding the data and rendering
   setTimeout(running, 100);
@@ -181,4 +206,3 @@ $(document).ready(function(){
     document.getElementById("menu").style.display = "none";
   });
 });
-
