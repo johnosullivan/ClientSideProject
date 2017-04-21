@@ -13,6 +13,18 @@ $(document).ready(function(){
   var flighteta = 120;
   var arrivalairportcode = 'ORD';
   var departureairportcode = '';
+
+
+
+  $('ul.tabs li').click(function(){
+		var tab_id = $(this).attr('data-tab');
+
+		$('ul.tabs li').removeClass('current');
+		$('.tab-content').removeClass('current');
+
+		$(this).addClass('current');
+		$("#"+tab_id).addClass('current');
+	})
   //Function for angle caluation for flight icon rotation
   degrFrom_rad = function(rad) { return rad * 180 / Math.PI; }
   radFrom_degr  = function(degr) { return degr * Math.PI / 180; }

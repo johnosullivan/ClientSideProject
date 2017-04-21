@@ -6,44 +6,100 @@
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <link rel="stylesheet" href="style/map.css">
+    <link rel="stylesheet" href="style/fontawesome/css/font-awesome.min.css">
   </head>
   <body>
   <!-- Adds the top nav bar -->
   <nav>
     <ul>
-  <li><span id="openMenu" style="font-size:30px;cursor:pointer;color:white;">&#9776;</span></li>
-  <li class="dropdown">
-   <a href="javascript:void(0)" class="dropbtn"><b>Go! Flight Tracker</b></a><img src="images/plane.png" alt="Go" style="width:50px;height:20px;">
-   <div class="dropdown-content">
-     <a href="index.html">Home</a>
-     <a href="about.html">About</a>
-   </div>
- </li>
-</ul>
+      <li><span id="openMenu" style="font-size:30px;cursor:pointer;color:white;">&#9776;</span></li>
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn"><b>Go! Flight Tracker</b> <small>v1.0</small></a><img src="images/plane.png" alt="Go" style="width:50px;height:20px;">
+        <div class="dropdown-content">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+        </div>
+      <li style="float:right"><a>Leave in <b>10 mins</b></a></li>
+      <li style="float:right"><a>75 &#x2103;</b></a></li>
+    </ul>
   </nav>
   <!-- Using google api docs added map -->
-
   <div id="wrapper">
-          <div id="content">
-              <div id="map"></div>
-          </div>
-      </div>
+    <div id="content">
+      <div id="map"></div>
+    </div>
+  </div>
   <!-- Using CSS added a loading spin -->
   <div id="loading" class="loading"></div>
-  <!-- Added aside for sidebar -->
+  <!-- Added aside for sidebar 9e5fb56909438d04028050b28c54dfd7 -->
   <aside id="menu" class="sidenav">
    <!-- Add styling trim
    <div class="sidenavtrim"></div>  -->
    <!-- Add a for close button for side menu-->
-   <a id="closeMenu" style="color:black;cursor:pointer;" class="closebtn"><strong>&times;</strong></a>
+
+   <a id="closeMenu" style="color:white;cursor:pointer;" class="closebtn"><strong>&times;</strong></a>
+
+   <ul class="tabs" style="background-color:#404040;">
+   		<li class="tab-link current" data-tab="tab-1"><i class="fa fa-genderless" aria-hidden="true"></i> General</li>
+   		<li class="tab-link" data-tab="tab-2"><i class="fa fa-compass" aria-hidden="true"></i> Directions</li>
+   		<li class="tab-link" data-tab="tab-3"><i class="fa fa-map-o" aria-hidden="true"></i> Misc.</li>
+   	</ul>
+
+   	<div id="tab-1" class="tab-content current">
+      <label class="labelname" for="labelflight"><strong>Flight ID:</strong></label>
+      <input type="text" id="flight" name="flight" placeholder="flight" value="">
+      <label class="labelname" for="labelflight"><strong>Your Location:</strong></label>
+      <input type="text" id="youlocation" name="youlocation" placeholder="your location" value="">
+      <label class="labelname"><strong>Flight #:</strong></label>
+      <br>
+      <label id="airlinenumber" class="labelvalue"></label>
+      <br>
+      <label class="labelname"><strong>Airline Provider:</strong></label>
+      <br>
+      <label id="airlinevalue" class="labelvalue"></label>
+      <br>
+      <label class="labelname"><strong>Departure Airport:</strong></label>
+      <br>
+      <label id="departurevalue" class="labelvalue"></label>
+      <br>
+      <label class="labelname"><strong>Arrival Airport:</strong></label>
+      <br>
+      <label id="arrivalvalue" class="labelvalue"></label>
+      <br>
+      <label class="labelname"><strong>Equipment:</strong></label>
+      <br>
+      <label id="equipmentvalue" class="labelvalue"></label>
+      <br>
+      <label class="labelname"><strong>Estimated Landing:</strong></label>
+      <br>
+      <label id="etavalue" class="labelvalue">N/A</label>
+      <br>
+      <label class="labelname"><strong>Flight Delays:</strong></label>
+      <br>
+      <label id="delayvalue" class="labelvalue">N/A</label>
+      <br>
+      <label class="labelname"><strong>Driving Time:</strong></label>
+      <br>
+      <label id="drivingtime" class="labelvalue">N/A</label>
+      <br>
+      <label id="bufferlabel" class="labelname">Buffer: 0 mins</label>
+      <br>
+      <input id="slider" value="0" type="range">
+      <br>
+      <h4 style="color:black;"id="govalue">Go at N/A</h4>
+      <br>   	</div>
+   	<div id="tab-2" class="tab-content">
+   	</div>
+   	<div id="tab-3" class="tab-content">
+   	</div>
+
+
    <!-- inner container -->
-   <section class="sidenavtop">
-     <!-- -->
+  <!--<section class="sidenavtop">
      <label class="labelname" for="labelflight"><strong>Flight ID:</strong></label>
      <input type="text" id="flight" name="flight" placeholder="flight" value="">
      <label class="labelname" for="labelflight"><strong>Your Location:</strong></label>
      <input type="text" id="youlocation" name="youlocation" placeholder="your location" value="">
-     <!-- Displays the flight and traffic info  -->
      <label class="labelname"><strong>Flight #:</strong></label>
      <br>
      <label id="airlinenumber" class="labelvalue"></label>
@@ -82,7 +138,7 @@
      <br>
      <h4 style="color:black;"id="govalue">Go at N/A</h4>
      <br>
-   </section>
+   </section>-->
   </aside>
   <div id="footer"></div>
 
