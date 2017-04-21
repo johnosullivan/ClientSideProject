@@ -343,6 +343,7 @@ the stacking order, position, padding, and overflow-x for the edges.
     background-color: #404040;
     overflow-x: hidden;
     padding-top: 44px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.82);
 }
 /*
 */

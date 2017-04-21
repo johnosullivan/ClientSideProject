@@ -9,11 +9,11 @@ $(document).ready(function(){
   var buffer = 0;
   var gotime = 0;
   //Mock data
-  var flightdelay = 25.5;
-  var flighteta = 120;
+  var flightdelay = 0;
+  var flighteta = 0;
   var arrivalairportcode = 'ORD';
   var departureairportcode = '';
-
+  var airportGPS = {};
 
 
   $('ul.tabs li').click(function(){
@@ -59,6 +59,12 @@ $(document).ready(function(){
   function updateGoTime() {
     gotime = flighteta + flightdelay - drivingtime - buffer;
     var now = new Date();
+
+    var realmin = gotime % 60
+    var hours = Math.floor(gotime / 60)
+    $("#navleave").html("<a>Leave in <b>"+ hours +" h " + Math.round(realmin) +" mins </b></a>");
+
+
     now.setMinutes(now.getMinutes() + gotime);
     $("#govalue").text("Go at:  " + now.toLocaleTimeString());
   }
@@ -105,6 +111,12 @@ $(document).ready(function(){
     });
   }
 
+  function weatherLoad() {
+    $.get("http://api.openweathermap.org/data/2.5/weather?lat=" + airportGPS['lat'] +"&lon=" + airportGPS['lng'] + "&units=metric&apikey=9e5fb56909438d04028050b28c54dfd7", function(data, status){
+        $('#temp').html("<a><i class=\"fa fa-thermometer-half\" aria-hidden=\"true\"></i> " + data['main']['temp'] + "&#x2103;</b></a>");
+    });
+  }
+
   function processData(data) {
     //Logs flight to console
     logs(data);
@@ -118,8 +130,15 @@ $(document).ready(function(){
 
     var estimated= new Date(data['landingTimes']['estimated']*1000);
     var scheduled= new Date(data['landingTimes']['scheduled']*1000);
+
+    var diff = Math.abs(estimated - new Date());
+    var minutes = Math.floor((diff/1000)/60);
+    flighteta = minutes;
+
     logs(estimated.toString());
-    logs(scheduled.toString());
+    logs(minutes);
+
+
     $('#etavalue').text(estimated.toString());
 
     arrivalairportcode = data['destination']['iata'];
@@ -150,6 +169,8 @@ $(document).ready(function(){
           if (airportdata.results.length != 0) {
             //If valid get the gps object
             var gpsairport = airportdata.results[0].geometry.location;
+            airportGPS = gpsairport;
+            weatherLoad();
             //Sets the airport marker
             var marker = new google.maps.Marker({ position: gpsairport, map: map });
             //Gets the airport shortname
