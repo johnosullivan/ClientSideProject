@@ -144,7 +144,7 @@ $(document).ready(function(){
             var aiportaddress = airportdata.results[0].address_components[0].short_name;
             logs("Arrival Airport: " + aiportaddress);
             //Sets UI for arrival
-            $("#arrivalvalue").text("(" + arrivalairportcode + ") " + aiportaddress);
+            $("#arrivalvalue").text(aiportaddress);
             //Waypoints of filed flight plane
             var waypoints = data['waypoints'];
             var flightPlanCoordinates = [];
@@ -153,9 +153,17 @@ $(document).ready(function(){
               var point = waypoints[i];
               flightPlanCoordinates.push({lat: point[1], lng: point[0]});
             }
+            var lineSymbol = { path: 'M 0,-1 0,1', strokeOpacity: 1, scale: 4 };
             //Creates the polyline to set to the maps object
             var flightPath = new google.maps.Polyline({
-              path: flightPlanCoordinates, geodesic: true, strokeColor: '#FFF', strokeOpacity: 1.0, strokeWeight: 4
+              path: flightPlanCoordinates,
+              strokeOpacity: 0,
+              icons: [{
+                icon: lineSymbol,
+                offset: '0',
+                repeat: '20px'
+              }],
+              strokeColor: '#939393'
             });
             flightPath.setMap(map);
             //Current waypoint from the actual flight
@@ -175,10 +183,15 @@ $(document).ready(function(){
             var lastItem = waypointtrack.pop();
             var secondlastItem = waypointtrack[waypointtrack.length - 1];
             var angle = getAngle(secondlastItem.coord[0],secondlastItem.coord[1],lastItem.coord[0],lastItem.coord[1]);
+            logs(angle);
             //Plane icon with it svg data
+            /*var plane = {
+                path: 'm510,255c0,-20.4 -17.85,-38.25 -38.25,-38.25l-140.25,0l-127.5,-204l-51,0l63.75,204l-140.25,0l-38.25,-51l-38.25,0l25.5,89.25l-25.5,89.25l38.25,0l38.25,-51l140.25,0l-63.75,204l51,0l127.5,-204l140.25,0c20.4,0 38.25,-17.85 38.25,-38.25z',
+                fillColor: 'black',fillOpacity: 0.8,scale: 0.1,strokeColor: 'black',strokeWeight: 1,anchor: new google.maps.Point(10, 250), rotation:angle
+            };*/
             var plane = {
-                path: 'M510,255c0-20.4-17.85-38.25-38.25-38.25H331.5L204,12.75h-51l63.75,204H76.5l-38.25-51H0L25.5,255L0,344.25h38.25 l38.25-51h140.25l-63.75,204h51l127.5-204h140.25C492.15,293.25,510,275.4,510,255z',
-                fillColor: 'black',fillOpacity: 0.8,scale: 0.1,strokeColor: 'black',strokeWeight: 1,anchor: new google.maps.Point(10, 250),rotation: angle
+                path: google.maps.SymbolPath.CIRCLE,
+                fillColor: 'black',fillOpacity: 1.0,scale: 10,strokeColor: 'black',strokeWeight: 1,rotation: angle
             };
             //Sets the plane marks for where it is located
             var marker = new google.maps.Marker({ position: {lat: lastItem.coord[1], lng: lastItem.coord[0]}, map: map, title: 'Plane Current Location',icon: plane });

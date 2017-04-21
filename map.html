@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Go? Flight Tracker</title>
+    <title>Go! Flight Tracker</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <link rel="stylesheet" href="style/map.css">
@@ -10,10 +10,24 @@
   <body>
   <!-- Adds the top nav bar -->
   <nav>
-    <span id="openMenu" style="font-size:30px;cursor:pointer;color:white;">&#9776;</span>
+    <ul>
+  <li><span id="openMenu" style="font-size:30px;cursor:pointer;color:white;">&#9776;</span></li>
+  <li class="dropdown">
+   <a href="javascript:void(0)" class="dropbtn"><b>Go! Flight Tracker</b></a><img src="images/plane.png" alt="Go" style="width:50px;height:20px;">
+   <div class="dropdown-content">
+     <a href="index.html">Home</a>
+     <a href="about.html">About</a>
+   </div>
+ </li>
+</ul>
   </nav>
   <!-- Using google api docs added map -->
-  <div id="map"></div>
+
+  <div id="wrapper">
+          <div id="content">
+              <div id="map"></div>
+          </div>
+      </div>
   <!-- Using CSS added a loading spin -->
   <div id="loading" class="loading"></div>
   <!-- Added aside for sidebar -->
@@ -70,6 +84,8 @@
      <br>
    </section>
   </aside>
+  <div id="footer"></div>
+
   <!-- includes the google js library and jquery code -->
   <script
     src="https://code.jquery.com/jquery-3.1.1.min.js"

@@ -9,10 +9,9 @@ var http           = require('http');
 var app            = express();
 var bodyParser     = require("body-parser");
 var requestpromise = require('request-promise');
-//Sets up the body parser for the node.js server
+//Sets up the body parser for the node.js server and server cofiguration
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');

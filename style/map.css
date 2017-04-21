@@ -5,11 +5,89 @@ html, body {
   margin: 0;
   padding: 0px;
   border-color: gray;
+  background-color: #4d78bc;
 }
 /* Always set the map height explicitly to define the size of the div
  * element that contains the map. */
 #map {
   height: 100%;
+}
+
+#mapcontainer {
+
+}
+#wrapper {
+	left: 0px;
+	top: 43px;
+	bottom:0px;
+	right: 0px;
+	position: absolute;
+}
+#footer {
+  bottom: 0;
+  right: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+#content {
+  top: 1px;
+	bottom: 0px;
+	overflow: auto;
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #4d78bc;
+}
+
+li {
+    float: left;
+}
+
+li a, .dropbtn {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+    background-color: 7093c9;
+}
+
+li.dropdown {
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    top: 43px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 /* for the nav bar on the map page */
 nav {
@@ -572,4 +650,3 @@ Will change the sidenav padding and sidenav anchor font if width is less the 450
   /*.sidenav {padding-top: 15px;}*/
   /*.sidenav a {font-size: 18px;}*/
 /*}*/
-
