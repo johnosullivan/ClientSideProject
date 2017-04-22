@@ -6,6 +6,7 @@ html, body {
   padding: 0px;
   border-color: gray;
 }
+
 /* Always set the map height explicitly to define the size of the div
  * element that contains the map. */
 #map {
@@ -17,6 +18,12 @@ nav {
   padding-right: 5px;
   padding-bottom: 4px;
   background-color: #4d78bc;
+}
+.coffeeButton{
+    border-radius: 400px;
+    width: 30px;
+    align-items: flex-end;
+    color: rosybrown;
 }
 /* for any labels that are not custom to be light gray */
 label {

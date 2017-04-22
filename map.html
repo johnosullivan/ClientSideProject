@@ -11,6 +11,7 @@
   <!-- Adds the top nav bar -->
   <nav>
     <span id="openMenu" style="font-size:30px;cursor:pointer;color:white;">&#9776;</span>
+    <button id = "coffeeButton" style = "font-size:20px;cursor:pointer;color:darkgrey ">Coffee?</button>
   </nav>
   <!-- Using google api docs added map -->
   <div id="map"></div>
@@ -18,8 +19,8 @@
   <div id="loading" class="loading"></div>
   <!-- Added aside for sidebar -->
   <aside id="menu" class="sidenav">
-   <!-- Add styling trim
-   <div class="sidenavtrim"></div>  -->
+   <!-- Add styling trim -->
+   <div class="sidenavtrim"></div>
    <!-- Add a for close button for side menu-->
    <a id="closeMenu" style="color:black;cursor:pointer;" class="closebtn"><strong>&times;</strong></a>
    <!-- inner container -->
@@ -29,7 +30,7 @@
      <input type="text" id="flight" name="flight" placeholder="flight" value="">
      <label class="labelname" for="labelflight"><strong>Your Location:</strong></label>
      <input type="text" id="youlocation" name="youlocation" placeholder="your location" value="">
-     <!-- Displays the flight and traffic info  -->
+     <!-- Displays the flight and traffic info in the side menu -->
      <label class="labelname"><strong>Flight #:</strong></label>
      <br>
      <label id="airlinenumber" class="labelvalue"></label>
@@ -76,6 +77,7 @@
     integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
     crossorigin="anonymous"></script>
   <script src="scripts/map.js"></script>
+  <script src ="scripts/add_a_stop.js"></script>
   <script type="text/javascript">
   function initMap() {
 
