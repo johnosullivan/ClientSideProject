@@ -50,45 +50,58 @@
       <input type="text" id="flight" name="flight" placeholder="flight" value="">
       <label class="labelname" for="labelflight"><strong>Your Location:</strong></label>
       <input type="text" id="youlocation" name="youlocation" placeholder="your location" value="">
-      <label class="labelname"><strong>Flight #:</strong></label>
+      <button id="rerun"><b><i class="fa fa-refresh" aria-hidden="true"></i></b></button>
+      <ul class="side">
+        <li class="side">
+          <label class="labelname"><strong>Flight #:</strong></label>
+          <br>&#8226;
+          <label id="airlinenumber" class="labelvalue"></label>
+        </li>
+        <li class="side">
+          <label class="labelname"><strong>Airline Provider:</strong></label>
+          <br>&#8226;
+          <label id="airlinevalue" class="labelvalue"></label>
+        </li>
+        <li class="side">
+          <label class="labelname"><strong>Departure Airport:</strong></label>
+          <br>&#8226;
+          <label id="departurevalue" class="labelvalue"></label>
+        </li>
+        <li class="side">
+          <label class="labelname"><strong>Arrival Airport:</strong></label>
+          <br>&#8226;
+          <label id="arrivalvalue" class="labelvalue"></label>
+        </li>
+        <li class="side">
+          <label class="labelname"><strong>Equipment:</strong></label>
+          <br>&#8226;
+          <label id="equipmentvalue" class="labelvalue"></label>
+        </li>
+        <li class="side">
+          <label class="labelname"><strong>Estimated Landing:</strong></label>
+          <br>&#8226;
+          <label id="etavalue" class="labelvalue">N/A</label>
+        </li>
+        <li class="side">
+          <label class="labelname"><strong>Flight Delays:</strong></label>
+          <br>&#8226;
+          <label id="delayvalue" class="labelvalue">N/A</label>
+        </li>
+        <li class="side">
+          <label class="labelname"><strong>Driving Time:</strong></label>
+          <br>&#8226;
+          <label id="drivingtime" class="labelvalue">N/A</label>
+        </li>
+      </ul>
+
+      <!--<label id="bufferlabel" class="labelname">Buffer: 0 mins</label>
       <br>
-      <label id="airlinenumber" class="labelvalue"></label>
+      <input id="slider" value="0" type="range">-->
       <br>
-      <label class="labelname"><strong>Airline Provider:</strong></label>
-      <br>
-      <label id="airlinevalue" class="labelvalue"></label>
-      <br>
-      <label class="labelname"><strong>Departure Airport:</strong></label>
-      <br>
-      <label id="departurevalue" class="labelvalue"></label>
-      <br>
-      <label class="labelname"><strong>Arrival Airport:</strong></label>
-      <br>
-      <label id="arrivalvalue" class="labelvalue"></label>
-      <br>
-      <label class="labelname"><strong>Equipment:</strong></label>
-      <br>
-      <label id="equipmentvalue" class="labelvalue"></label>
-      <br>
-      <label class="labelname"><strong>Estimated Landing:</strong></label>
-      <br>
-      <label id="etavalue" class="labelvalue">N/A</label>
-      <br>
-      <label class="labelname"><strong>Flight Delays:</strong></label>
-      <br>
-      <label id="delayvalue" class="labelvalue">N/A</label>
-      <br>
-      <label class="labelname"><strong>Driving Time:</strong></label>
-      <br>
-      <label id="drivingtime" class="labelvalue">N/A</label>
-      <br>
-      <label id="bufferlabel" class="labelname">Buffer: 0 mins</label>
-      <br>
-      <input id="slider" value="0" type="range">
-      <br>
-      <h4 style="color:black;"id="govalue">Go at N/A</h4>
       <br>   	</div>
    	<div id="tab-2" class="tab-content">
+      <ul id="directions" class="side">
+      </ul>
    	</div>
    	<div id="tab-3" class="tab-content">
    	</div>

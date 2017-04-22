@@ -66,18 +66,38 @@ $(document).ready(function(){
 
 
     now.setMinutes(now.getMinutes() + gotime);
-    $("#govalue").text("Go at:  " + now.toLocaleTimeString());
+    //$("#govalue").text("Go at:  " + now.toLocaleTimeString());
   }
   //find the total distance by adding up the routes in response.
   function totalDistance(result) {
     //gets all the waypoints
+    //<li class="side"></li>
     var routes = result.routes[0];
+    console.log(routes);
+    var steps = [];
+
     //adds up all the mirco distances
     for (var i = 0; i < routes.legs.length; i++) {
       var leg = routes.legs[i];
+      steps = steps.concat(leg.steps);
       drivingdistance += leg.distance.value;
       drivingtime += leg.duration.value;
     }
+
+
+    var directiondata = "";
+    for (var i = 0, j = steps.length; i < j; i++) {
+      var s = steps[i]
+      var step = s.instructions;
+      var distance = s.distance.text;
+      var snum = i + 1;
+      directiondata += "<li class=\"side\">"+ snum + ") " + step + " (" + distance + ")</li>";
+    }
+    $("#directions").html(directiondata);
+
+
+    console.log(steps);
+
     //gets the total in km.
     drivingdistance = drivingdistance / 1000;
     drivingtime = drivingtime / 60;
