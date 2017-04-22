@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  "use strict";
   // Grab the data from the input fields and build the url to set as location
   $("#go").click(function() {
     var flight = $('#flight').val();
@@ -7,4 +8,20 @@ $(document).ready(function(){
     $("#flight").val("");
     $("#location").val("");
   });
+
+
+  var images = ['images/chicago.jpg',
+               'images/newyork.jpg',
+               'images/sanfran.jpg',
+               'images/city1.jpg',
+               'images/city2.jpg',
+               'images/city3.jpg',
+               'images/city4.jpg',
+               'images/city5.jpg',
+               'images/city6.jpg'];
+
+  var randomNumber = Math.floor(Math.random() * images.length);
+  var bgImg = 'url(' + images[randomNumber] + ') no-repeat center center fixed;';
+
+  $('body').css({'background': bgImg, 'background-size': 'cover', '-webkit-background-size': 'cover', '-moz-background-size': 'cover', '-o-background-size': 'cover'});
 });

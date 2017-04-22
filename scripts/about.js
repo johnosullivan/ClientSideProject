@@ -17,6 +17,6 @@ $(document).ready(function () {
     var randomNumber = Math.floor(Math.random() * images.length);
     var bgImg = 'url(' + images[randomNumber] + ')';
 
-    //$('body').css({'background': bgImg, 'background-size': 'cover'});
+    $('body').css({'background': bgImg, 'background-size': 'cover'});
 
 });

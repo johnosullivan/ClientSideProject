@@ -53,6 +53,16 @@
       <button id="rerun"><b><i class="fa fa-refresh" aria-hidden="true"></i></b></button>
       <ul class="side">
         <li class="side">
+          <label class="labelname"><strong>Temperature:</strong></label>
+          <br>&#8226;
+          <label id="temperature" class="labelvalue"></label>
+        </li>
+        <li class="side">
+          <label class="labelname"><strong>Leave In:</strong></label>
+          <br>&#8226;
+          <label id="leavein" class="labelvalue"></label>
+        </li>
+        <li class="side">
           <label class="labelname"><strong>Flight #:</strong></label>
           <br>&#8226;
           <label id="airlinenumber" class="labelvalue"></label>
@@ -104,6 +114,13 @@
       </ul>
    	</div>
    	<div id="tab-3" class="tab-content">
+      <ul id="directions" class="side">
+        <li class="side">
+          <label id="bufferlabel" class="labelname">Buffer: 0 mins</label>
+          <br>
+          <input id="slider" value="0" type="range">
+        </li>
+      </ul>
    	</div>
 
 

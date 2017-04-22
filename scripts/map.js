@@ -16,6 +16,7 @@ $(document).ready(function(){
   var airportGPS = {};
 
 
+
   $('ul.tabs li').click(function(){
 		var tab_id = $(this).attr('data-tab');
 
@@ -63,6 +64,7 @@ $(document).ready(function(){
     var realmin = gotime % 60
     var hours = Math.floor(gotime / 60)
     $("#navleave").html("<a>Leave in <b>"+ hours +" h " + Math.round(realmin) +" mins </b></a>");
+    $("#leavein").html("<b>"+ hours +" h " + Math.round(realmin) +" mins </b>");
 
 
     now.setMinutes(now.getMinutes() + gotime);
@@ -91,7 +93,7 @@ $(document).ready(function(){
       var step = s.instructions;
       var distance = s.distance.text;
       var snum = i + 1;
-      directiondata += "<li class=\"side\">"+ snum + ") " + step + " (" + distance + ")</li>";
+      directiondata += "<li class=\"side\"><b style=\"color: #335386;\">"+ snum + ")</b> " + step + " (" + distance + ")</li>";
     }
     $("#directions").html(directiondata);
 
@@ -133,11 +135,12 @@ $(document).ready(function(){
 
   function weatherLoad() {
     $.get("http://api.openweathermap.org/data/2.5/weather?lat=" + airportGPS['lat'] +"&lon=" + airportGPS['lng'] + "&units=metric&apikey=9e5fb56909438d04028050b28c54dfd7", function(data, status){
+        $('#temperature').html("<i class=\"fa fa-thermometer-half\" aria-hidden=\"true\"></i> " + data['main']['temp'] + "&#x2103;</b>");
         $('#temp').html("<a><i class=\"fa fa-thermometer-half\" aria-hidden=\"true\"></i> " + data['main']['temp'] + "&#x2103;</b></a>");
     });
   }
 
-  function processData(data) {
+  function processData(data,location) {
     //Logs flight to console
     logs(data);
     //Sets the flight information from the data to the UI labels
@@ -167,7 +170,6 @@ $(document).ready(function(){
     * Google Docs
     * https://developers.google.com/maps/documentation/geocoding/start
     */
-    var location = decodeURI($.parameter('location'));
     $('#youlocation').val(location);
     $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURIComponent(location) + '&key=' + apikey, function(startdata) {
       //Check if there is a valid address with array coiunt
@@ -256,6 +258,9 @@ $(document).ready(function(){
               draggable: true,
               map: map,
             });
+            google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
+              
+            });
             //finds the directions
             findDirection(location, arrivalairportcode, directionsService,directionsDisplay);
             $("#loading").hide();
@@ -274,20 +279,31 @@ $(document).ready(function(){
     });
 
   }
-  //the script to get GPS data and plot data
-  function processing(){
-    //Gets the flight ID from the URL
+
+  function trigger() {
     var flight = $.parameter('flight');
+    var location = decodeURI($.parameter('location'));
+    processing(flight,location);
+  }
+  //the script to get GPS data and plot data
+  function processing(flight,location){
+    //Gets the flight ID from the URL
+    //var flight = $.parameter('flight');
     $.ajax({
         type: "GET", url: "http://localhost:8080/api/flight/" + flight, crossDomain : true
     }).done(function(data) {
-      processData(data['flightdata']);
+      processData(data['flightdata'],location);
     }).fail( function(xhr, textStatus, errorThrown) {
       alert("KJ");
     });
   }
+
+  $('#rerun').click(function() {
+    $("#loading").show();
+    processing($('#flight').val(),$('#youlocation').val());
+  });
   // To simulate the apps finding the data and rendering
-  setTimeout(processing, 100);
+  setTimeout(trigger, 100);
   // To trigger once the app sidebar is opened
   $('#openMenu').click(function() {
     document.getElementById("menu").style.display = "block";
