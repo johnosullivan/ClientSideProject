@@ -2,15 +2,8 @@
 
 /*sets background to img, will eventually show the */
 /*image of the city in which user is located*/
-/*body {*/
-  /*background: url(../images/chicago.jpg) no-repeat center center fixed;*/
-  /*background: bgImg;*/
- /*background-*/
-   /*-webkit-background-size: cover;*/
-  /*-moz-background-size: cover;*/
-  /*-o-background-size: cover;*/
-  /*background-size: cover;*/
-/*}*/
+
+
 /*styles DOM box features of unordered list*/
 ul {
     list-style-type: none;
