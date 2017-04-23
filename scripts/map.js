@@ -380,12 +380,14 @@ $(document).ready(function(){
             // error message in case airport is unrecognizable
           } else {
             alert("Sorry not valid airport.");
+            window.location.href = "index.html";
             $("#loading").hide();
           }
         });
       } else {
         //Not valid start address
         alert("Sorry not a valid address!");
+        window.location.href = "index.html";
         $("#loading").hide();
       }
     });
@@ -408,7 +410,13 @@ $(document).ready(function(){
     $.ajax({
         type: "GET", url: base + flight, crossDomain : true
     }).done(function(data) {
-      processData(data['flightdata'],location);
+      var ss = data['flightdata']['unknown'];
+      if (ss == undefined) {
+        processData(data['flightdata'],location);
+      } else {
+        alert("Not Valid Flight");
+        window.location.href = "index.html";
+      }
     }).fail( function(xhr, textStatus, errorThrown) {
       alert("Cannot connection to the serverside.");
     });
