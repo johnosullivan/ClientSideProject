@@ -8,7 +8,7 @@ $(document).ready(function(){
   var drivingdistance = 0;
   var buffer = 0;
   var gotime = 0;
-  //Data
+  //Global Data Variables
   var flightdelay = 0;
   var flighteta = 0;
   var arrivalairportcode = '';
@@ -17,15 +17,13 @@ $(document).ready(function(){
   var wproute = [];
   var orginaddress = '';
   var destinationaddress = '';
-  var directionsS;
-  var directionsD;
-
+  var gdirectionsService;
+  var gdirectionsDisplay;
+  //Tabs control jquery change
   $('ul.tabs li').click(function(){
 		var tab_id = $(this).attr('data-tab');
-
 		$('ul.tabs li').removeClass('current');
 		$('.tab-content').removeClass('current');
-
 		$(this).addClass('current');
 		$("#"+tab_id).addClass('current');
 	})
@@ -39,7 +37,6 @@ $(document).ready(function(){
     if (Math.abs(x) > Math.PI){ if (x > 0.0) { x = -(2.0 * Math.PI - x); } else {  x = (2.0 * Math.PI + x); } }
     return (degrFrom_rad(Math.atan2(x, a)) + 360.0) % 360.0;
   }
-  //UI setup
   //Trigger when slider is moved
   $("#slider").change(function(){
     //Gets the value and sets updated text to buffer
@@ -61,23 +58,30 @@ $(document).ready(function(){
   }
   //Updates the go time.
   function updateGoTime() {
-    gotime = flighteta + flightdelay - drivingtime - buffer;
-    var now = new Date();
-    var realmin = gotime % 60
-    var hours = Math.floor(gotime / 60)
-    $("#navleave").html("<a>Leave in <b>"+ hours +" h " + Math.round(realmin) +" mins </b></a>");
-    $("#leavein").html("<b>"+ hours +" h " + Math.round(realmin) +" mins </b>");
-    now.setMinutes(now.getMinutes() + gotime);
-    $("#loading").hide();
+    gotime = flighteta - drivingtime - buffer;
+    logs("Gotime: " + gotime);
+    if (gotime > 0) {
+      //Time caluation for leaving time
+      var realmin = gotime % 60
+      var hours = Math.floor(gotime / 60)
+      $("#navleave").html("<a>Leave in <b>"+ hours +" h " + Math.round(realmin) +" mins </b></a>");
+      $("#leavein").html("Leave in <b>"+ hours +" h " + Math.round(realmin) +" mins </b>");
+      $("#loading").hide();
+    } else {
+      //Time caluation for your late
+      var gotimelate = Math.abs(gotime);
+      var realminlate = gotime % 60
+      var hourslate = Math.floor(gotimelate / 60)
+      $("#navleave").html("<a>Your late by <b>"+ hourslate +" h " + Math.round(Math.abs(realminlate)) +" mins </b></a>");
+      $("#leavein").html("Your late by <b>"+ hourslate +" h " + Math.round(Math.abs(realminlate)) +" mins </b>");
+      $("#loading").hide();
+    }
   }
   //find the total distance by adding up the routes in response.
   function totalDistance(result) {
     //gets all the waypoints
-    //<li class="side"></li>
     var routes = result.routes[0];
-    console.log(routes);
     var steps = [];
-
     //adds up all the mirco distances
     for (var c = 0; c < routes.legs.length; c++) {
       var leg = routes.legs[c];
@@ -85,8 +89,7 @@ $(document).ready(function(){
       drivingdistance += leg.distance.value;
       drivingtime += leg.duration.value;
     }
-
-
+    //Creates the directions data for inject into directions element
     var directiondata = "";
     for (var i = 0, j = steps.length; i < j; i++) {
       var s = steps[i]
@@ -96,7 +99,7 @@ $(document).ready(function(){
       directiondata += "<li class=\"side\"><b style=\"color: #335386;\">"+ snum + ")</b> " + step + " (" + distance + ")</li>";
     }
     $("#directions").html(directiondata);
-
+    //Creates the routes data for inject into routes element
     var routesdata = "";
     routesdata += "<li class=\"side\"><b style=\"color: #335386;\">Start:</b>" + orginaddress + "</li>";
     for (var x = 0, y = wproute.length; x < y; x++) {
@@ -105,7 +108,6 @@ $(document).ready(function(){
     }
     routesdata += "<li class=\"side\"><b style=\"color: #335386;\">End:</b> " + destinationaddress + "</li>";
     $("#routes").html(routesdata);
-
     //gets the total in km.
     drivingdistance = drivingdistance / 1000;
     drivingtime = drivingtime / 60;
@@ -117,18 +119,19 @@ $(document).ready(function(){
     //updateGoTime with all data received
     updateGoTime();
   }
-
+  //Detects the delete button being click to change routes waypoints
   $(document).on('click', '#routes button', function(){
      var id = parseInt(jQuery(this).attr("id"));
      wproute.splice(id, 1);
      $("#loading").show();
-     findDirection(orginaddress, destinationaddress, directionsS, directionsD);
+     //Re-caluation the directions
+     findDirection(orginaddress, destinationaddress, gdirectionsService, gdirectionsDisplay);
   });
   //find the direction via google maps and displays them
   function findDirection(origin, destination, service, display) {
     //Creates the route request {location: new google.maps.LatLng(45.658197,-73.636333),stopover: true}
-    directionsS = service;
-    directionsD = display;
+    gdirectionsService = service;
+    gdirectionsDisplay = display;
     var points = [{location: origin}];
     for (var i = 0, j = wproute.length; i < j; i += 1) {
       var wp = wproute[i];
@@ -153,19 +156,28 @@ $(document).ready(function(){
       }
     });
   }
-
+  //Added marker place to the routes
   function addToRoute(marker) {
     wproute.push(marker);
-    findDirection(orginaddress, destinationaddress, directionsS, directionsD);
+    $("#loading").show();
+    //Re-caluation the directions
+    findDirection(orginaddress, destinationaddress, gdirectionsService, gdirectionsDisplay);
   }
-
+  //Gets the weather data
   function weatherLoad() {
     $.get("http://api.openweathermap.org/data/2.5/weather?lat=" + airportGPS['lat'] +"&lon=" + airportGPS['lng'] + "&units=metric&apikey=9e5fb56909438d04028050b28c54dfd7", function(data, status){
         $('#temperature').html("<i class=\"fa fa-thermometer-half\" aria-hidden=\"true\"></i> " + data['main']['temp'] + "&#x2103;</b>");
         $('#temp').html("<a><i class=\"fa fa-thermometer-half\" aria-hidden=\"true\"></i> " + data['main']['temp'] + "&#x2103;</b></a>");
     });
   }
-
+  //Compares two dates for minutes
+  function dateDiff(date1, date2){
+    var diff = (date2 - date1)/1000;
+    var diff = Math.abs(Math.floor(diff));
+    var min = Math.floor(diff/(60));
+    return min;
+  }
+  //Processes the flight data and given location
   function processData(data,location) {
     //Logs flight to console
     logs(data);
@@ -174,24 +186,32 @@ $(document).ready(function(){
     $('#airlinevalue').text(data['airline']['shortName']);
     $('#airlinenumber').text(data['codeShare']['friendlyIdent']);
     $('#equipmentvalue').text(data['aircraft']['friendlyType']);
-    $('#arrivalvalue').text(data['destination']['friendlyName'])
-    $('#departurevalue').text(data['origin']['friendlyName'])
+    $('#arrivalvalue').text(data['destination']['friendlyName']);
+    $('#departurevalue').text(data['origin']['friendlyName']);
+    $('#terminal').text("#" + data['destination']['terminal']);
+    //Destintation and orgin address sets
     destinationaddress = data['destination']['friendlyName'];
     orginaddress = location;
-
-    var estimated= new Date(data['landingTimes']['estimated']*1000);
-    var scheduled= new Date(data['landingTimes']['scheduled']*1000);
-
-    var diff = Math.abs(estimated - new Date());
+    //Gets the flight times to caluate the diff in time
+    var gateArrivalTimes_estimated= new Date(data['gateArrivalTimes']['estimated']*1000);
+    var gateArrivalTimes_scheduled= new Date(data['gateArrivalTimes']['scheduled']*1000);
+    var diff = Math.abs(gateArrivalTimes_estimated - new Date());
     var minutes = Math.floor((diff/1000)/60);
+    //Sets time will landed in miuntes
     flighteta = minutes;
-
-    logs(estimated.toString());
-    logs(minutes);
-
-
-    $('#etavalue').text(estimated.toString());
-
+    //Sets the time delay or early value
+    var diffmin = dateDiff(gateArrivalTimes_estimated,gateArrivalTimes_scheduled);
+    var diffminreal = diffmin % 60
+    var diffhours = Math.floor(diffmin / 60)
+    if( (gateArrivalTimes_estimated.getTime() > gateArrivalTimes_scheduled.getTime())) {
+      $("#delayvalue").text("Delay: " + Math.round(diffhours) + " h " +  Math.round(diffminreal) + " mins");
+      flightdelay = diffmin;
+    } else {
+      $("#delayvalue").text("Early: " + Math.round(diffhours) + " h " +  Math.round(diffminreal) + " mins");
+      flightdelay = (diffmin * -1);
+    }
+    //Sets the ETA and IATA code
+    $('#etavalue').text(gateArrivalTimes_estimated.toString());
     arrivalairportcode = data['destination']['iata'];
     //Makes the API call to the google API to get lat long of start location
     /*
@@ -286,50 +306,68 @@ $(document).ready(function(){
               draggable: true,
               map: map,
             });
-
+            //Gets the search box
             var input = document.getElementById('search');
+            //Creates new google Search box
             var searchBox = new google.maps.places.SearchBox(input);
+            //Adds an listener to detect bounds change
             map.addListener('bounds_changed', function() {
               searchBox.setBounds(map.getBounds());
             });
+            //Holding array for the markers
             var markers = [];
+            //Adds listener to the search box for when new places are found
             searchBox.addListener('places_changed', function() {
+              //Gets the places from search
               var places = searchBox.getPlaces();
+              //Clears search input
               $("#search").val('');
+              //Checks the length
               if (places.length == 0) { return; }
+              //Sets all the markers from map
               markers.forEach(function(marker) {
                 marker.setMap(null);
               });
+              //Sets empty array
               markers = [];
+              //Creates a new bounds map object
               var bounds = new google.maps.LatLngBounds();
               places.forEach(function(place) {
+                //Checks is valid point
                 if (!place.geometry) { return; }
+                //Creates the icon linked to place
                 var icon = {
                   url: place.icon, size: new google.maps.Size(71, 71), origin: new google.maps.Point(0, 0), anchor: new google.maps.Point(17, 34), scaledSize: new google.maps.Size(25, 25)
                 };
+                //Creates and setup the markers
                 var marker = new google.maps.Marker({
                   map: map, icon: icon, title: place.name, position: place.geometry.location
                 });
+                //Stores the marker for later
                 markers.push(marker);
+                //Adds listener for the click and infowindow setup
                 google.maps.event.addListener(marker, 'click', (function(marker, i) {
                   return function() {
+                    //Creates new info window with add button
                     var infowindow = new google.maps.InfoWindow({ });
                     var popupString = '<div ><b>' + marker.title + '</b><button id="add"><b><i class="fa fa-plus" aria-hidden="true"></i></b></button></div>';
+                    //Sets the content and present to map
                     infowindow.setContent(popupString);
                     infowindow.open(map, marker);
+                    //Detects add and will add to route
                     $("#add").click(function () {
+                      //Start loading
                       $("#loading").show();
+                      //Add waypoint
                       addToRoute(marker);
+                      //CLose the info window
                       infowindow.close();
                     });
                   }
                 })(marker, i));
-                if (place.geometry.viewport) {
-                  bounds.union(place.geometry.viewport);
-                } else {
-                  bounds.extend(place.geometry.location);
-                }
+                if (place.geometry.viewport) { bounds.union(place.geometry.viewport); } else { bounds.extend(place.geometry.location); }
               });
+              //Resize map to fix bounds
               map.fitBounds(bounds);
             });
             //Detects drag in route change
@@ -350,11 +388,9 @@ $(document).ready(function(){
         alert("Sorry not a valid address!");
         $("#loading").hide();
       }
-      //Hides the spinner since done running
     });
-
   }
-
+  //Trigger function starts the processing
   function trigger() {
     var flight = $.parameter('flight');
     var location = decodeURI($.parameter('location'));
@@ -363,16 +399,15 @@ $(document).ready(function(){
   //the script to get GPS data and plot data
   function processing(flight,location){
     //Gets the flight ID from the URL
-    //var flight = $.parameter('flight');
     $.ajax({
         type: "GET", url: "http://localhost:8080/api/flight/" + flight, crossDomain : true
     }).done(function(data) {
       processData(data['flightdata'],location);
     }).fail( function(xhr, textStatus, errorThrown) {
-      alert("KJ");
+      alert("Cannot connection to the serverside.");
     });
   }
-
+  //Reruns the processing with the current value in the two textfields
   $('#rerun').click(function() {
     $("#loading").show();
     processing($('#flight').val(),$('#youlocation').val());

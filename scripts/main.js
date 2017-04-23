@@ -3,7 +3,6 @@ $(document).ready(function() {
     //random background generator
     var images = ['images/chicago.jpg',
         'images/newyork.jpg',
-        'images/sanfran.jpg',
         'images/city1.jpg',
         'images/city2.jpg',
         'images/city3.jpg',
@@ -14,8 +13,15 @@ $(document).ready(function() {
         var randomNumber = Math.floor(Math.random() * images.length);
         var bgImg = 'url(' + images[randomNumber] + ')';
 
-        $('body').css({'background': bgImg, 'background-size': 'cover'});
-        ;
+        $('body').css({'background': bgImg,
+         'background-size': 'cover',
+         'background-repeat':'no-repeat',
+         'background-attachment':'fixed',
+         'background-position':'center center;',
+         '-webkit-background-size':'cover',
+         '-moz-background-size':'cover',
+         '-o-background-size':'cover'});
+
 
     // Grab the data from the input fields and build the url to set as location
     $("#go").click(function () {
