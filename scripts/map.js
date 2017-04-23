@@ -2,7 +2,7 @@ $(document).ready(function(){
   //Logic for the go app.
   //Variables for the app.
   var apikey = 'AIzaSyC_ep81AybHxhf6J3pc2eJ-AFEbxQ1cMbI';
-  var debugging = true;
+  var debugging = false;
   var currenteta = 0;
   var drivingtime = 0;
   var drivingdistance = 0;
@@ -399,8 +399,14 @@ $(document).ready(function(){
   //the script to get GPS data and plot data
   function processing(flight,location){
     //Gets the flight ID from the URL
+    var base = '';
+    if (debugging) {
+      base = 'http://localhost:8080/api/flight/'
+    } else {
+      base = 'https://obscure-bastion-20749.herokuapp.com/api/flight/';
+    }
     $.ajax({
-        type: "GET", url: "http://localhost:8080/api/flight/" + flight, crossDomain : true
+        type: "GET", url: base + flight, crossDomain : true
     }).done(function(data) {
       processData(data['flightdata'],location);
     }).fail( function(xhr, textStatus, errorThrown) {
