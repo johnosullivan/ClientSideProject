@@ -42,7 +42,7 @@
    <ul class="tabs" style="background-color:#404040;">
    		<li class="tab-link current" data-tab="tab-1"><i class="fa fa-genderless" aria-hidden="true"></i> General</li>
    		<li class="tab-link" data-tab="tab-2"><i class="fa fa-compass" aria-hidden="true"></i> Directions</li>
-   		<li class="tab-link" data-tab="tab-3"><i class="fa fa-map-o" aria-hidden="true"></i> Misc.</li>
+   		<li class="tab-link" data-tab="tab-3"><i class="fa fa-map-o" aria-hidden="true"></i> Options</li>
    	</ul>
 
    	<div id="tab-1" class="tab-content current">
@@ -116,59 +116,20 @@
    	<div id="tab-3" class="tab-content">
       <ul id="directions" class="side">
         <li class="side">
+          <input id="search" class="controls" type="text" placeholder="Picking up anything?">
+        </li>
+        <li class="side">
           <label id="bufferlabel" class="labelname">Buffer: 0 mins</label>
           <br>
           <input id="slider" value="0" type="range">
         </li>
       </ul>
+      <ul id="routes" class="side">
+
+      </ul>
    	</div>
 
 
-   <!-- inner container -->
-  <!--<section class="sidenavtop">
-     <label class="labelname" for="labelflight"><strong>Flight ID:</strong></label>
-     <input type="text" id="flight" name="flight" placeholder="flight" value="">
-     <label class="labelname" for="labelflight"><strong>Your Location:</strong></label>
-     <input type="text" id="youlocation" name="youlocation" placeholder="your location" value="">
-     <label class="labelname"><strong>Flight #:</strong></label>
-     <br>
-     <label id="airlinenumber" class="labelvalue"></label>
-     <br>
-     <label class="labelname"><strong>Airline Provider:</strong></label>
-     <br>
-     <label id="airlinevalue" class="labelvalue"></label>
-     <br>
-     <label class="labelname"><strong>Departure Airport:</strong></label>
-     <br>
-     <label id="departurevalue" class="labelvalue"></label>
-     <br>
-     <label class="labelname"><strong>Arrival Airport:</strong></label>
-     <br>
-     <label id="arrivalvalue" class="labelvalue"></label>
-     <br>
-     <label class="labelname"><strong>Equipment:</strong></label>
-     <br>
-     <label id="equipmentvalue" class="labelvalue"></label>
-     <br>
-     <label class="labelname"><strong>Estimated Landing:</strong></label>
-     <br>
-     <label id="etavalue" class="labelvalue">N/A</label>
-     <br>
-     <label class="labelname"><strong>Flight Delays:</strong></label>
-     <br>
-     <label id="delayvalue" class="labelvalue">N/A</label>
-     <br>
-     <label class="labelname"><strong>Driving Time:</strong></label>
-     <br>
-     <label id="drivingtime" class="labelvalue">N/A</label>
-     <br>
-     <label id="bufferlabel" class="labelname">Buffer: 0 mins</label>
-     <br>
-     <input id="slider" value="0" type="range">
-     <br>
-     <h4 style="color:black;"id="govalue">Go at N/A</h4>
-     <br>
-   </section>-->
   </aside>
   <div id="footer"></div>
 
@@ -183,6 +144,6 @@
 
   }
   </script>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_ep81AybHxhf6J3pc2eJ-AFEbxQ1cMbI&callback=initMap"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyC_ep81AybHxhf6J3pc2eJ-AFEbxQ1cMbI&callback=initMap"></script>
 </body>
 </html>

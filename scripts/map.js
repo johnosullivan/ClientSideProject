@@ -8,14 +8,17 @@ $(document).ready(function(){
   var drivingdistance = 0;
   var buffer = 0;
   var gotime = 0;
-  //Mock data
+  //Data
   var flightdelay = 0;
   var flighteta = 0;
-  var arrivalairportcode = 'ORD';
+  var arrivalairportcode = '';
   var departureairportcode = '';
   var airportGPS = {};
-
-
+  var wproute = [];
+  var orginaddress = '';
+  var destinationaddress = '';
+  var directionsS;
+  var directionsD;
 
   $('ul.tabs li').click(function(){
 		var tab_id = $(this).attr('data-tab');
@@ -60,15 +63,12 @@ $(document).ready(function(){
   function updateGoTime() {
     gotime = flighteta + flightdelay - drivingtime - buffer;
     var now = new Date();
-
     var realmin = gotime % 60
     var hours = Math.floor(gotime / 60)
     $("#navleave").html("<a>Leave in <b>"+ hours +" h " + Math.round(realmin) +" mins </b></a>");
     $("#leavein").html("<b>"+ hours +" h " + Math.round(realmin) +" mins </b>");
-
-
     now.setMinutes(now.getMinutes() + gotime);
-    //$("#govalue").text("Go at:  " + now.toLocaleTimeString());
+    $("#loading").hide();
   }
   //find the total distance by adding up the routes in response.
   function totalDistance(result) {
@@ -79,8 +79,8 @@ $(document).ready(function(){
     var steps = [];
 
     //adds up all the mirco distances
-    for (var i = 0; i < routes.legs.length; i++) {
-      var leg = routes.legs[i];
+    for (var c = 0; c < routes.legs.length; c++) {
+      var leg = routes.legs[c];
       steps = steps.concat(leg.steps);
       drivingdistance += leg.distance.value;
       drivingtime += leg.duration.value;
@@ -97,8 +97,14 @@ $(document).ready(function(){
     }
     $("#directions").html(directiondata);
 
-
-    console.log(steps);
+    var routesdata = "";
+    routesdata += "<li class=\"side\"><b style=\"color: #335386;\">Start:</b>" + orginaddress + "</li>";
+    for (var x = 0, y = wproute.length; x < y; x++) {
+      var wp = wproute[x];
+      routesdata += "<li class=\"side\"><b style=\"color: #335386;\">"+ (x + 1) + ") </b>"+ wp.title + "<br><button id=\""+ x +"\" style=\"background-color:#bf1111;\"><b><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></b></button></li>";
+    }
+    routesdata += "<li class=\"side\"><b style=\"color: #335386;\">End:</b> " + destinationaddress + "</li>";
+    $("#routes").html(routesdata);
 
     //gets the total in km.
     drivingdistance = drivingdistance / 1000;
@@ -111,13 +117,28 @@ $(document).ready(function(){
     //updateGoTime with all data received
     updateGoTime();
   }
+
+  $(document).on('click', '#routes button', function(){
+     var id = parseInt(jQuery(this).attr("id"));
+     wproute.splice(id, 1);
+     $("#loading").show();
+     findDirection(orginaddress, destinationaddress, directionsS, directionsD);
+  });
   //find the direction via google maps and displays them
   function findDirection(origin, destination, service, display) {
-    //Creates the route request
+    //Creates the route request {location: new google.maps.LatLng(45.658197,-73.636333),stopover: true}
+    directionsS = service;
+    directionsD = display;
+    var points = [{location: origin}];
+    for (var i = 0, j = wproute.length; i < j; i += 1) {
+      var wp = wproute[i];
+      points.push({location: new google.maps.LatLng(wp.position.lat(),wp.position.lng()),stopover: true});
+    }
+    points.push({location: destination});
     service.route({
       origin: origin, //sets the start location
       destination: destination, //sets the destination
-      waypoints: [{location: origin}, {location: destination}], //sets waypoints
+      waypoints: points, //sets waypoints
       travelMode: 'DRIVING', //travel mode set to driving
       avoidTolls: true //avoid YES please who like toll trolls
     }, function(response, status) { //callback
@@ -131,6 +152,11 @@ $(document).ready(function(){
         $("#loading").hide();
       }
     });
+  }
+
+  function addToRoute(marker) {
+    wproute.push(marker);
+    findDirection(orginaddress, destinationaddress, directionsS, directionsD);
   }
 
   function weatherLoad() {
@@ -150,6 +176,8 @@ $(document).ready(function(){
     $('#equipmentvalue').text(data['aircraft']['friendlyType']);
     $('#arrivalvalue').text(data['destination']['friendlyName'])
     $('#departurevalue').text(data['origin']['friendlyName'])
+    destinationaddress = data['destination']['friendlyName'];
+    orginaddress = location;
 
     var estimated= new Date(data['landingTimes']['estimated']*1000);
     var scheduled= new Date(data['landingTimes']['scheduled']*1000);
@@ -258,8 +286,55 @@ $(document).ready(function(){
               draggable: true,
               map: map,
             });
+
+            var input = document.getElementById('search');
+            var searchBox = new google.maps.places.SearchBox(input);
+            map.addListener('bounds_changed', function() {
+              searchBox.setBounds(map.getBounds());
+            });
+            var markers = [];
+            searchBox.addListener('places_changed', function() {
+              var places = searchBox.getPlaces();
+              $("#search").val('');
+              if (places.length == 0) { return; }
+              markers.forEach(function(marker) {
+                marker.setMap(null);
+              });
+              markers = [];
+              var bounds = new google.maps.LatLngBounds();
+              places.forEach(function(place) {
+                if (!place.geometry) { return; }
+                var icon = {
+                  url: place.icon, size: new google.maps.Size(71, 71), origin: new google.maps.Point(0, 0), anchor: new google.maps.Point(17, 34), scaledSize: new google.maps.Size(25, 25)
+                };
+                var marker = new google.maps.Marker({
+                  map: map, icon: icon, title: place.name, position: place.geometry.location
+                });
+                markers.push(marker);
+                google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                  return function() {
+                    var infowindow = new google.maps.InfoWindow({ });
+                    var popupString = '<div ><b>' + marker.title + '</b><button id="add"><b><i class="fa fa-plus" aria-hidden="true"></i></b></button></div>';
+                    infowindow.setContent(popupString);
+                    infowindow.open(map, marker);
+                    $("#add").click(function () {
+                      $("#loading").show();
+                      addToRoute(marker);
+                      infowindow.close();
+                    });
+                  }
+                })(marker, i));
+                if (place.geometry.viewport) {
+                  bounds.union(place.geometry.viewport);
+                } else {
+                  bounds.extend(place.geometry.location);
+                }
+              });
+              map.fitBounds(bounds);
+            });
+            //Detects drag in route change
             google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
-              
+                totalDistance(directionsDisplay.directions);
             });
             //finds the directions
             findDirection(location, arrivalairportcode, directionsService,directionsDisplay);
