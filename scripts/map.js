@@ -165,7 +165,13 @@ $(document).ready(function(){
   }
   //Gets the weather data
   function weatherLoad() {
-    $.get("http://api.openweathermap.org/data/2.5/weather?lat=" + airportGPS['lat'] +"&lon=" + airportGPS['lng'] + "&units=metric&apikey=9e5fb56909438d04028050b28c54dfd7", function(data, status){
+    var base = '';
+    if (debugging) {
+      base = 'http://localhost:8080/api/weather/'
+    } else {
+      base = 'https://obscure-bastion-20749.herokuapp.com/api/weather/';
+    }
+    $.get(base  + airportGPS['lat'] +"/" + airportGPS['lng'], function(data, status){
         $('#temperature').html("<i class=\"fa fa-thermometer-half\" aria-hidden=\"true\"></i> " + data['main']['temp'] + "&#x2103;</b>");
         $('#temp').html("<a><i class=\"fa fa-thermometer-half\" aria-hidden=\"true\"></i> " + data['main']['temp'] + "&#x2103;</b></a>");
     });

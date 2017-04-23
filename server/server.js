@@ -52,6 +52,20 @@ router.get("/flight/:id", function(req, res) {
     //console.error(err); //Will print any error that was thrown in the previous error handler.
   });
 });
+router.get("/weather/:lat/:lng", function(req, res) {
+  requestpromise.get({ uri: 'http://api.openweathermap.org/data/2.5/weather?lat='+req.params.lat+'&lon='+ req.params.lng +'&units=metric&apikey=9e5fb56909438d04028050b28c54dfd7' , transform: function(body, res) {
+      return JSON.parse(body);
+    }
+  }).then(function(data){
+    //Responds to the request with flight data
+    res.json(data);
+  }, function(err){
+    console.log("Error");
+    res.console.error(err);
+  }).catch(function(err){
+    //console.error(err); //Will print any error that was thrown in the previous error handler.
+  });
+});
 //Sets up the mock data in mongo database
 router.get("/setup_db", function(req, res) {
   //Setups up the database for mock data
