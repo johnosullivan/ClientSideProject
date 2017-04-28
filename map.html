@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -36,15 +35,14 @@
    <!-- Add styling trim
    <div class="sidenavtrim"></div>  -->
    <!-- Add a for close button for side menu-->
-
    <a id="closeMenu" style="color:white;cursor:pointer;" class="closebtn"><strong>&times;</strong></a>
-
+   <!-- Adds the tab menu options-->
    <ul class="tabs" style="background-color:#404040;">
    		<li class="tab-link current" data-tab="tab-1"><i class="fa fa-genderless" aria-hidden="true"></i> General</li>
    		<li class="tab-link" data-tab="tab-2"><i class="fa fa-compass" aria-hidden="true"></i> Directions</li>
    		<li class="tab-link" data-tab="tab-3"><i class="fa fa-map-o" aria-hidden="true"></i> Options</li>
    	</ul>
-
+    <!-- the content for the first tab -->
    	<div id="tab-1" class="tab-content current">
       <label class="labelname" for="labelflight"><strong>Flight ID:</strong></label>
       <input type="text" id="flight" name="flight" placeholder="flight" value="">
@@ -52,6 +50,7 @@
       <input type="text" id="youlocation" name="youlocation" placeholder="your location" value="">
       <button id="rerun"><b><i class="fa fa-refresh" aria-hidden="true"></i></b></button>
       <ul class="side">
+        <!-- All the flight information -->
         <li class="side">
           <label class="labelname"><strong>Temperature:</strong></label>
           <br>&#8226;
@@ -105,18 +104,18 @@
           <label id="drivingtime" class="labelvalue">N/A</label>
         </li>
       </ul>
-
-      <!--<label id="bufferlabel" class="labelname">Buffer: 0 mins</label>
       <br>
-      <input id="slider" value="0" type="range">-->
       <br>
-      <br>   	</div>
+    </div>
+    <!-- the content for the first tab -->
    	<div id="tab-2" class="tab-content">
+      <!-- Direction continaer -->
       <ul id="directions" class="side">
       </ul>
    	</div>
+    <!-- the content for the first tab -->
    	<div id="tab-3" class="tab-content">
-      <ul id="directions" class="side">
+      <ul class="side">
         <li class="side">
           <input id="search" class="controls" type="text" placeholder="Picking up anything?">
         </li>
@@ -126,15 +125,12 @@
           <input id="slider" value="0" type="range">
         </li>
       </ul>
+      <!-- routes continaer -->
       <ul id="routes" class="side">
-
       </ul>
    	</div>
-
-
   </aside>
   <div id="footer"></div>
-
   <!-- includes the google js library and jquery code -->
   <script
     src="https://code.jquery.com/jquery-3.1.1.min.js"
@@ -142,9 +138,7 @@
     crossorigin="anonymous"></script>
   <script src="scripts/map.js"></script>
   <script type="text/javascript">
-  function initMap() {
-
-  }
+  function initMap() {}
   </script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyC_ep81AybHxhf6J3pc2eJ-AFEbxQ1cMbI&callback=initMap"></script>
 </body>
