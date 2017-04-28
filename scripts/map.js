@@ -416,8 +416,8 @@ $(document).ready(function(){
     $.ajax({
         type: "GET", url: base + flight, crossDomain : true
     }).done(function(data) {
-      var ss = data['flightdata']['unknown'];
-      if (ss == undefined) {
+      var unknown = data['flightdata']['unknown'];
+      if (unknown == undefined) {
         processData(data['flightdata'],location);
       } else {
         alert("Not Valid Flight");

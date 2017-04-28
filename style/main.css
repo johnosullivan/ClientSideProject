@@ -1,9 +1,5 @@
-
-
 /*sets background to img, will eventually show the */
 /*image of the city in which user is located*/
-
-
 /*styles DOM box features of unordered list*/
 ul {
     list-style-type: none;
@@ -68,7 +64,6 @@ input[type=text], select {
     border-color: #e3e3e3;
     box-sizing: border-box;
 }
-
 /*styles the Go! button*/
 input[type=button] {
     width: 100%;
@@ -82,7 +77,6 @@ input[type=button] {
     cursor: pointer;
     font-weight: bold;
 }
-
 /*styles the hover display over item*/
 input[type=button]:hover {
     background-color: white;

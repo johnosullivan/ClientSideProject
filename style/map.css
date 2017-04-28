@@ -12,10 +12,9 @@ html, body {
 #map {
   height: 100%;
 }
-
-#mapcontainer {
-
-}
+/* for the map container */
+#mapcontainer { }
+/* wrapper for the resizng of the map */
 #wrapper {
 	left: 0px;
 	top: 43px;
@@ -23,6 +22,7 @@ html, body {
 	right: 0px;
 	position: absolute;
 }
+/* footer option to have at the botton of the map view */
 #footer {
   bottom: 0;
   right: 0;
@@ -30,6 +30,7 @@ html, body {
   position: absolute;
   width: 100%;
 }
+/* content div style for the in the wrapper */
 #content {
   top: 1px;
 	bottom: 0px;
@@ -38,6 +39,7 @@ html, body {
 	left: 0;
 	right: 0;
 }
+/* styling for the unordered list */
 ul {
     list-style-type: none;
     margin: 0;
@@ -45,11 +47,11 @@ ul {
     overflow: hidden;
     background-color: #4d78bc;
 }
-
+/* styling for the list item */
 li {
     float: left;
 }
-
+/* styling for the list item with dropdown */
 li a, .dropbtn {
     display: inline-block;
     color: white;
@@ -57,15 +59,15 @@ li a, .dropbtn {
     padding: 14px 16px;
     text-decoration: none;
 }
-
+/* styling for the hover of list item */
 li a:hover, .dropdown:hover .dropbtn {
     background-color: 7093c9;
 }
-
+/* styling dropdown */
 li.dropdown {
     display: inline-block;
 }
-
+/* styling for the dropdown content */
 .dropdown-content {
     display: none;
     position: absolute;
@@ -75,7 +77,7 @@ li.dropdown {
     z-index: 1;
     top: 43px;
 }
-
+/* styling for the dropdown content a */
 .dropdown-content a {
     color: black;
     padding: 12px 16px;
@@ -83,14 +85,12 @@ li.dropdown {
     display: block;
     text-align: left;
 }
-
+/* styling for the dropdown content a background color */
 .dropdown-content a:hover {background-color: #f1f1f1}
-
+/* styling for the dropdown content specifies the type of box */
 .dropdown:hover .dropdown-content {
     display: block;
 }
-
-
 /* for the nav bar on the map page */
 nav {
   padding-left: 5px;
@@ -149,7 +149,6 @@ h2 {
   bottom: 0;
   right: 0;
 }
-
 /* defines the animations the loading can use to spin 360 degree */
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
@@ -363,19 +362,6 @@ input[type=range]:focus::-ms-fill-lower {
 input[type=range]:focus::-ms-fill-upper {
     background: #404040;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
 First ruleset for the sidenav class. This ruleset sets the height,width,z-index for
 the stacking order, position, padding, and overflow-x for the edges.
@@ -438,7 +424,6 @@ Will change the sidenav padding and sidenav anchor font if width is less the 450
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
-
 /*!* style for the body *!*/
 /*html, body {*/
   /*height: 100%;*/
