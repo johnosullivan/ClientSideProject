@@ -19,7 +19,7 @@ ul {
 }
 /* sets the list location to the right fo the screen */
 li {
-    float: right;
+    float: left;
 }
 /*Specify the text style of the about page title*/
 .title {
@@ -90,7 +90,7 @@ ul {
 }
 /* sets the list location to the right fo the screen */
 li {
-    float: right;
+    float: left;
 }
 /*Specify the text style of the about page title*/
 .title {
