@@ -9,7 +9,7 @@ ul {
 }
 /*styles list items */
 li {
-    float: right;
+    float: left;
 }
 /*set font, color, size, alignment of title*/
 .title{
