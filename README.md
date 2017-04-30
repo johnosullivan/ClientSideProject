@@ -12,17 +12,19 @@ GO? accesses information from Google Maps’ API and flight information to deter
 ## Installation
 
 ```
-git clone https://github.com/johnosullivan/ClientSideProject.git
+1) git clone https://github.com/johnosullivan/ClientSideProject.git
 
-cd ClientSideProject
+2) cd ClientSideProject
 
-cd server && npm install && cd ..
+3) cd server && npm install && cd ..
 
-Open scripts/maps.js
+4) Open scripts/maps.js
 
-Change 'var debugging' to either true to use localhost or false to have heroku hosted API. 
+5) Change 'var debugging' to either true to use localhost or false to have heroku hosted API. 
 
-open index.html in Chrome
+6) node server/server.js
+
+7) open index.html in Chrome
 
 ```
 
