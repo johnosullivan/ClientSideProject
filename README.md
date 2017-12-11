@@ -1,11 +1,6 @@
 
 # Client-Side Project Final
 
-## Team
-
-* John O'Sullivan <a href="https://github.com/johnosullivan">https://github.com/johnosullivan</a> 
-* Katie Eaton  <a href="https://github.com/k-eatonn ">https://github.com/k-eatonn </a> 
-
 ## Purpose
 GO? accesses information from Google Maps’ API and flight information to determine when a person should leave for the airport when picking up a friend or loved one. Our application's purpose is to take the guesswork out of picking up a friend from the airport. The only user input needed is a flight number and beginning address, the application then calculates the most ideal route to the airport. Go! allows you to modify your route in case you would like stop somewhere. As expressed in the presentation John is very passionate about aviation and planes. We both believed this would be a perfect opportunity to use different forms of data to create a tool that is simple and universally beneficial. 
 
